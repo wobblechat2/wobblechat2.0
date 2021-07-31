@@ -1,4 +1,5 @@
-import { Router } from "express";
+// import { Router } from "express";
+const { Router } = require('express');
 
 const globalDebugRouter = Router();
 
@@ -14,4 +15,4 @@ const globalDebugHandler = (req, _res, next) => {
 
 globalDebugRouter.use(globalDebugHandler);
 
-export default globalDebugRouter;
+// export default globalDebugRouter;
