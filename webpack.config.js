@@ -31,7 +31,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    publicPath: "/build/",
     port: 8080,
     contentBase: path.resolve(__dirname, "build"),
     hot: true,
