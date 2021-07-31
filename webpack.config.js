@@ -1,8 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack');
+
 
 module.exports = {
-  entry: "./client/app.js",
+  entry: "./client/index.js",
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
@@ -38,5 +40,9 @@ module.exports = {
         logLevel: "debug",
       },
     },
+  },
+  resolve: {
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: ['.js', '.jsx'],
   },
 };
