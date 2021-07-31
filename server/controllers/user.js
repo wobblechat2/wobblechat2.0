@@ -6,7 +6,11 @@ userController.createUser = async (req, _res, next) => {
   // Get username and password from body of POST request
   const { username, password } = req.body;
   if (!username || !password)
-    return next({ status: 401, message: "Invalid username or password." });
+    return next({
+      status: 401,
+      message: "Invalid username or password.",
+      error: new Error("No username or password."),
+    });
   let salt, hashedPassword;
   // Create hashed version of password.
   try {
@@ -16,6 +20,7 @@ userController.createUser = async (req, _res, next) => {
     return next({
       status: 500,
       message: "Error generating username and password.",
+      error: err,
     });
   }
   // Save user to PostgreSQL database, using parameterized queries.
@@ -28,6 +33,7 @@ userController.createUser = async (req, _res, next) => {
     return next({
       status: 500,
       message: "Could not save username and password.",
+      error: err,
     });
   }
 
@@ -35,4 +41,4 @@ userController.createUser = async (req, _res, next) => {
   return next();
 };
 
-export default userController;
+module.exports = userController;
