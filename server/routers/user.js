@@ -3,8 +3,7 @@ const userController = require("../controllers/user");
 
 const userRouter = Router();
 
-userRouter.get("/signup", userController.createUser, (req, res, next) => {
-  console.log(res.locals);
+userRouter.post("/signup", userController.createUser, (req, res, next) => {
   res.status(200).send({ id: res.locals.id });
 });
 

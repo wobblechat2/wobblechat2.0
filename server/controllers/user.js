@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const pool = require("../db/connect");
 const userController = {};
 
-userController.createUser = async (req, _res, next) => {
+userController.createUser = async (req, res, next) => {
   // Get username and password from body of POST request
   const { username, password } = req.body;
   if (!username || !password)
@@ -11,18 +11,11 @@ userController.createUser = async (req, _res, next) => {
       message: "Invalid username or password.",
       error: new Error("No username or password."),
     });
-  let salt, hashedPassword;
+
   // Create hashed version of password.
-  try {
-    salt = await bcrypt.getSalt(10);
-    hashedPassword = await bcrypt.hash(password, salt);
-  } catch (err) {
-    return next({
-      status: 500,
-      message: "Error generating username and password.",
-      error: err,
-    });
-  }
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
   // Save user to PostgreSQL database, using parameterized queries.
   try {
     const params = [username, hashedPassword];
@@ -30,6 +23,7 @@ userController.createUser = async (req, _res, next) => {
     const { rows } = await pool.query(query, params);
     res.locals.id = rows[0].id; // Assign "ID" of created user to res.locals.id, so that our anonymous function in the router can pass it back to the user.
   } catch (err) {
+    console.log(err);
     return next({
       status: 500,
       message: "Could not save username and password.",
