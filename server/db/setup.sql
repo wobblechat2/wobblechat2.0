@@ -7,17 +7,17 @@ Then
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username varchar(50) UNIQUE,
-  password varchar(50),
+  password varchar(100),
   isLoggedIn boolean DEFAULT true
 );
 
 CREATE TABLE IF NOT EXISTS questions (
   id SERIAL PRIMARY KEY,
-  isAnswered boolean DEFAULT false NOT NULL,
-  creator integer REFERENCES users(id),
-  url varchar(100) UNIQUE NOT NULL,
   title varchar(500) NOT NULL,
   description text NOT NULL,
+  url varchar(100) UNIQUE NOT NULL,
+  isAnswered boolean DEFAULT false NOT NULL,
+  creator integer REFERENCES users(id),
   /* Can you do a foreign key reference of a boolean in another table? The boolean is not a key... */
   isOpen boolean DEFAULT false NOT NULL
 );
