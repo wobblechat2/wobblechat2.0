@@ -65,7 +65,6 @@ userController.signInUser = async (req, res, next) => {
 
   // Verify that password matches the hashed password in the DB
   const compared = await bcrypt.compare(password, user.password);
-  console.log(compared);
   if (!compared)
     return next({
       status: 401,
@@ -76,6 +75,11 @@ userController.signInUser = async (req, res, next) => {
   res.locals.id = user.id;
 
   // If username and password are valid, create cookie for user
+  return next();
+};
+
+userController.signOutUser = async (_req, res, next) => {
+  res.cookie("ssid", "", { maxAge: 0 });
   return next();
 };
 

@@ -9,12 +9,10 @@ const globalErrorHandler = require("./routers/errors");
 // const questionRouter = require("./routers/question.js");
 // const messageRouter = require(".routers/message.js");
 
-if (process.env.NODE_ENV === "development") app.use(debugRouter);
-
 //parsing request body
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+if (process.env.NODE_ENV === "development") app.use(debugRouter);
 
 app.get("/api/hello", (req, res) => {
   res.status(200).json({ hello: "world" });

@@ -4,7 +4,10 @@ const cookieController = {};
 cookieController.setCookie = (_req, res, next) => {
   try {
     const { id } = res.locals;
-    res.cookie("ssid", id);
+    res.cookie("ssid", id, {
+      expires: new Date(Date.now() + 1200000),
+      httpOnly: false,
+    });
     return next();
   } catch (err) {
     return next({

@@ -22,4 +22,10 @@ userRouter.post(
   }
 );
 
+// Eliminates cookie and sends user back to home page.
+userRouter.post("/signout", userController.signOutUser, (req, res) => {
+  console.log("COOKIES ARE NOW: ", req.cookies);
+  res.status(200).send({ hello: "world" });
+});
+
 module.exports = userRouter;
