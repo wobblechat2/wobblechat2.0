@@ -78,9 +78,4 @@ userController.signInUser = async (req, res, next) => {
   return next();
 };
 
-userController.signOutUser = async (_req, res, next) => {
-  res.cookie("ssid", "", { maxAge: 0 });
-  return next();
-};
-
 module.exports = userController;

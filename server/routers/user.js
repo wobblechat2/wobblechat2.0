@@ -7,7 +7,7 @@ const userRouter = Router();
 userRouter.post(
   "/signup",
   userController.createUser,
-  cookieController.setCookie,
+  cookieController.setCookies,
   (_req, res) => {
     res.status(200).send({ id: res.locals.id });
   }
@@ -16,16 +16,15 @@ userRouter.post(
 userRouter.post(
   "/signin",
   userController.signInUser,
-  cookieController.setCookie,
+  cookieController.setCookies,
   (_req, res) => {
     res.status(200).send({ id: res.locals.id });
   }
 );
 
 // Eliminates cookie and sends user back to home page.
-userRouter.post("/signout", userController.signOutUser, (req, res) => {
-  console.log("COOKIES ARE NOW: ", req.cookies);
-  res.status(200).send({ hello: "world" });
+userRouter.post("/signout", cookieController.unsetCookies, (_req, res) => {
+  res.status(200).redirect("/");
 });
 
 module.exports = userRouter;
