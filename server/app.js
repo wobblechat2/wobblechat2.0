@@ -5,23 +5,23 @@ const cookieParser = require("cookie-parser");
 
 //import routers
 const debugRouter = require("./routers/debug.js");
-const userRouter = require("./routers/user.js")
+// const userRouter = require("./routers/user.js")
 const questionRouter = require("./routers/question.js");
-const messageRouter = require(".routers/message.js")
+const messageRouter = require("./routers/message.js");
 
 if (process.env.NODE_ENV === "development") app.use(debugRouter);
 
 //parsing request body
 app.use(express.json());
 app.use(cookieParser())
-app.use(express.urlencoded({ extended: true}));q
+app.use(express.urlencoded({ extended: true}));
 
 app.get("/api/hello", (req, res) => {
   res.status(200).json({ hello: "world" });
 });
 
-app.use('/users', userRouter);
-app.use('/questions', questionRouter); // --> is this a different endpoint?
+// app.use('/users', userRouter);
+app.use('/questions', questionRouter); 
 app.use('/messages', messageRouter);
 // //route handler for main page
 // app.get('/', (req,res) => {
