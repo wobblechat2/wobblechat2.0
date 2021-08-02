@@ -13,8 +13,8 @@ const CreateQuestionForm = (props) => {
   const [description, setDescription] = useState('');
   
   //not working
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     alert(`This is what was submitted: ${title}`);
   }
 
