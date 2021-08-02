@@ -18,7 +18,7 @@ router.post('/', questionController.postQuestion, questionController.getQuestion
   });
 })
 
-//get all messages when user re-enters a previous chat
+//get all messages when user enters a chat
 router.get('/:id', messageController.getMessages, (req,res) => {
   return res.status(200).json({
     messages: res.locals.messages,

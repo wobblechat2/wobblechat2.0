@@ -47,6 +47,23 @@ questionController.postQuestion = (req, res, next) => {
 
 }
 
+questionController.setInactive = (req, res, next) => {
+  // Grab the user ID from cookies
+  const { ssid } = req.cookies;
+  // Make DB query, setting question(s) of that user to be inactive.
+  const query = `UPDATE questions SET isOpen = false WHERE creator = $1`;
+  // Calling next (no need to return anything)
+  const params = [ssid]
+  pool.query(query, params).then(result => {
+    return next();
+  }).catch(err => {
+    return next({
+      message: "Could not set user questions to inactive",
+      status: 500
+    });
+  })
+};
+
 //isAnswered should update (put) isAnswered field to True
 questionController.putAnswered = (req, res, next) => {
   //query -> update question req.params.id isAnswered = true
