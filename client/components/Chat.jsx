@@ -2,6 +2,12 @@ import React, { useEffect } from 'react';
 
 //import logo from './assets/chat_logo.png';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+
+
 function Chat() {
 
   // var socket = io();
@@ -27,6 +33,12 @@ function Chat() {
   
 
     return (
+
+      <>
+
+ 
+ 
+
       <div className="App">
       <ul id="messages">
         <li>Message 1</li>
@@ -38,6 +50,10 @@ function Chat() {
       <input id="input-chat" autocomplete="off" /><button>Send</button>
     </form>
       </div>
+
+
+</>
+
     );
 }
 
