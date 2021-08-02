@@ -32,7 +32,7 @@ const QuestionCard = (props) => {
 
 <div className="question-container">
   <Card.Title>{title}</Card.Title>
-  <Button variant="primary">Answer question</Button>
+  <Button variant="primary" className="min-button">Answer question</Button>
 </div>
     <Card.Text>
 

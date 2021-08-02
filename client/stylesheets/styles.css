@@ -19,7 +19,6 @@
 html {
   box-sizing: border-box;
   font: 100% 'Source Sans Pro', sans-serif;
-  background-color: aquamarine;
 
 }
 
@@ -121,6 +120,11 @@ body {
 
 .chat-style{
   background-color: cadetblue;
+}
+
+.min-button{
+  min-width: 170px;
+  margin-left:5px;
 }
 
 /* Chatroom styling */
