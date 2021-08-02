@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import QuestionsContainer from './QuestionsContainer';
+import CreateQuestionForm from '../components/CreateQuestionForm';
 import Chat from '../components/Chat';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 
 class MainAppContainer extends Component {
   constructor(props) {
@@ -94,10 +94,8 @@ class MainAppContainer extends Component {
 <br/>
 
 <QuestionsContainer  questions={this.state.questions} />
-
-{/* <Chat /> */}
+<CreateQuestionForm />
   </>        
-
 )
   }
 }
