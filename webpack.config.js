@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./client/app.js",
+  entry: "./client/index.js",
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
@@ -20,7 +20,10 @@ module.exports = {
         },
       },
       {
-        test: /\.s[ac]ss$/i,
+        //Andrew: Not sure how to load in css files but trying this way since it seems the former version only processed scss files...
+        //test: /\.s[ac]ss$/i,
+        test: /\.css$/i,
+
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
@@ -38,5 +41,9 @@ module.exports = {
         logLevel: "debug",
       },
     },
+  },
+  resolve: {
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: [".js", ".jsx"],
   },
 };
