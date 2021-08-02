@@ -47,7 +47,7 @@ function Chat() {
         <li>Message 4</li>
       </ul>
     <form id="form-chat" action="">
-      <input id="input-chat" autocomplete="off" /><button>Send</button>
+      <input id="input-chat" /><button>Send</button>
     </form>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { render } from "react-dom";
+import { BrowserRouter, Switch, Route, Link, withRouter  } from "react-router-dom";
 
 import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
@@ -20,15 +21,15 @@ const RoutingApp = props => {
               https://reacttraining.com/react-router/web/guides/quick-start
         */}
         <Switch>
-          <Route path="/login" 
+          {/* <Route path="/login" 
           component={Login} />
-          <ProtectedRoute exact={true} path='/' component={MainAppContainer} />
+          <ProtectedRoute exact={true} path='/' component={MainAppContainer} /> */}
           
-          {/*<Route
+          <Route
             exact
             path="/"
             component={MainAppContainer}/>
-          */}
+         
             
                       {/* <Route
             exact

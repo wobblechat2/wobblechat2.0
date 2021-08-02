@@ -8,24 +8,30 @@ const QuestionsContainer = ({ questions }) => {
   //questions object passed down as prop from MainAppContainer
   //  const [{ questionId, isActive, title, description, chatURL }] = questions;
 
+  console.log(questions);
 
 
-  const activeQuestionObjects = questions.filter(question => question.isOpen === true).map(
-    ({ id, title, description, url, creator }) => {
-      return (
-        <QuestionCard
-          key={id}
-          title={title}
-          description={description}
-          creator={creator}
-          chatURL={url}
-        />
-      );
+  const activeQuestionObjects = questions.map(
+    ({ id, title, description, url, creator, isopen }) => {
+      // chrome dev tools is showing "isopen" as lowercase for some reason
+      if(isopen){
+        return (
+          <QuestionCard
+            key={id}
+            title={title}
+            description={description}
+            creator={creator}
+            chatURL={url}
+          />
+        );
+      }
     }
   );
 
-  const inactiveQuestionObjects = questions.filter(question => question.isOpen === false).map(
-    ({ id, title, description, url, creator }) => {
+  const inactiveQuestionObjects = questions.map(
+    ({ id, title, description, url, creator, isopen }) => {
+      // chrome dev tools is showing "isopen" as lowercase for some reason
+      if(!isopen){
       return (
         <QuestionCard
         key={id}
@@ -36,6 +42,7 @@ const QuestionsContainer = ({ questions }) => {
       />
       );
     }
+  }
   );
 
   return (
