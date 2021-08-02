@@ -34,7 +34,10 @@ const QuestionCard = (props) => {
   <Button variant="primary">Answer question</Button>
 </div>
     <Card.Text>
-    {description}
+
+{description}
+          
+
     </Card.Text>
   </Card.Body>
 </Card>
