@@ -47,40 +47,6 @@ questionController.postQuestion = (req, res, next) => {
 
 }
 
-//openChat should... send a req to Websockets? 
-//gets details from messages
-//puts details into question
-questionController.getMessages = (req, res, next) => {
-  //needs to pull existing Messages related to Questions (join tables)
-  const prevMessages = `SELECT * FROM messages LEFT JOIN questions ON messages.questionId = questions.id AND questions.id = ${req.params.id}`
-  
-  pool
-    .query(prevMessages)
-    .then(messages => {
-      if(!messages) return next();
-      res.locals.messages = messages;
-      return next();
-      // console.log(messages);
-    })
-    .catch(err => {
-      return next({
-        status: 500,
-        message: "Error grabbing messages",
-      })
-    })
-}
-  
-//   //isActive is true ------> is this a put? 
-// questionController.putQuestion = (req, res, next) => {
-//   return next();
-// }
-
-// //closeChat should... put isActive = false
-
-// questionController.putChat = (req, res, next) => {
-//   return next();
-// }
-
 //isAnswered should update (put) isAnswered field to True
 questionController.putAnswered = (req, res, next) => {
   //query -> update question req.params.id isAnswered = true

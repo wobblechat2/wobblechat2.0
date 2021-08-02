@@ -1,5 +1,6 @@
 const express = require('express');
 const questionController = require('../controllers/question.js');
+const messageController = require('../controllers/message.js');
 const router = express.Router();
 
 //call controller methods for each type of request to endpoints
@@ -9,7 +10,7 @@ router.get('/', questionController.getQuestions, (req,res) => {
   return res.status(200).json(res.locals.questions);
 })
 
-//create new question ----> 
+//create new question ----> needs websockets
 router.post('/', questionController.postQuestion, questionController.getQuestions, (req,res) => {
   return res.status(200).json({
     newQuestion: res.locals.questions[0].url,
@@ -18,17 +19,14 @@ router.post('/', questionController.postQuestion, questionController.getQuestion
 })
 
 //get all messages when user re-enters a previous chat
-router.get('/messages/:id', /* join chat */ questionController.getMessages, /*questionController.putMessages,*/ (req,res) => {
-  return res.status(200).json(res.locals.messages);
+router.get('/:id', messageController.getMessages, (req,res) => {
+  return res.status(200).json({
+    messages: res.locals.messages,
+    url: res.locals.messages.length > 0 ? res.locals.messages[0].url : null // Return null or the url
+  });
 })
 
-// ------> upon Login, a user's chat need to be set to Active and automatically join window
-// -------> on logout, user's chat needs to be Inactive
-
-// --------> openChat
-// -------> once a user clicks a question to open chat, 
-// --------> the question Creator's chat window needs to be opened
-// --------> if a user has an open chat, user cannot click other questions
+// -------> on logout, user's chat needs to  be Inactive
 
 // -------> messages need a Creator relationship
 
