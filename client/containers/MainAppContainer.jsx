@@ -88,14 +88,17 @@ class MainAppContainer extends Component {
 &nbsp;&nbsp;<Link to={'/signout'}><Button variant="secondary">Sign out</Button></Link></div>
 </div>
 
+
+
+
 <Card classname="chat-style">
-  <Card.Body><br/><br/><br/><br/>This is where the chat window will be displayed.<br/><br/><br/><br/></Card.Body>
+<Chat />
 </Card>
 <br/>
 
 <QuestionsContainer  questions={this.state.questions} />
 
-{/* <Chat /> */}
+
   </>        
 
 )

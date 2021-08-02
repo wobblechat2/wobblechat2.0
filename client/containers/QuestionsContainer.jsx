@@ -39,7 +39,7 @@ const QuestionsContainer = ({ questions }) => {
   return (
     <div className="question-window">
       <h2>
-      Open questions </h2>
+      Active questions </h2>
       {activeQuestionObjects}
 <br />
       <h2>
