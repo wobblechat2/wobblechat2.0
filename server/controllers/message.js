@@ -15,7 +15,7 @@ messageController.postMessage = (req, res, next) => {
   pool
     .query(insertMessage, params)
     .then(newMessage => {
-      console.log(newMessage);
+      // console.log(newMessage);
       res.locals.newMessage = newMessage;
     })
     .catch(err => {

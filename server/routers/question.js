@@ -26,7 +26,7 @@ router.get('/messages/:id', questionController.getMessages, /*questionController
 
 // set question to isAnswered = true
 router.put('/:id', questionController.putAnswered, (req,res) => {
-  return res.status(200).json(req.locals.id);  /// <------- tbd
+  return res.status(200).json(res.locals.id);  /// <------- tbd
 })
 
 

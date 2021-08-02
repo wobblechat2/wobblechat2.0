@@ -12,7 +12,7 @@ questionController.getQuestions = (req, res, next) => {
   pool
     .query(questionQuery)
     .then(questions => {
-      console.log("response: ", questions);
+      // console.log("response: ", questions);
       const {id, title, description, url} = questions.rows[0];
       res.locals.questions = questions;
     })
@@ -28,19 +28,19 @@ questionController.getQuestions = (req, res, next) => {
 
 //postQuestion should create a Question and next() will call openChat
 questionController.postQuestion = (req, res, next) => {
-  // ----> url come from websockets
+  // ----------> url comes from websockets
   //userid comes from user controller (prev step in create question). 
-  const url = 'testKenny8';
+  const url = 'testKenny10';
   const title = 'testingPostController';
   const description = 'test';
   const creator = '2';
   const params = [url,title,description,creator];
   const insertQuestion = 'INSERT INTO questions (url,title,description,creator) VALUES ($1,$2,$3,$4) RETURNING *'
-  
+
   pool
     .query(insertQuestion, params)
     .then(newQuestion => {
-      console.log(newQuestion);
+      // console.log(newQuestion);
       res.locals.newQuestion = newQuestion;
     })
     .catch(err => {
@@ -65,7 +65,7 @@ questionController.getMessages = (req, res, next) => {
     .then(messages => {
       if(!messages) return next();
       res.locals.messages = messages;
-      console.log(messages);
+      // console.log(messages);
     })
     .catch(err => {
       return next({
@@ -96,7 +96,7 @@ questionController.putAnswered = (req, res, next) => {
     .query(updateQuestion)
     .then(id => {
       res.locals.id = id;
-      console.log(id);
+      // console.log(id);
     })
     .catch(err => {
       return next({
