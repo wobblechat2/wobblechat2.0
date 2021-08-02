@@ -25,7 +25,7 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/user/login", {
+    fetch("/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

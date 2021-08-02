@@ -19,13 +19,19 @@ userRouter.post(
   userController.signInUser,
   cookieController.setCookies,
   (_req, res) => {
-    res.status(200).send({ id: res.locals.id });
+    res.status(200).redirect("/");
   }
 );
 
 // Eliminates cookie and sends user back to home page.
-userRouter.post("/signout", cookieController.unsetCookies, questionController.setInactive, (_req, res) => {
-  res.status(200).redirect("/");
-});
+userRouter.post(
+  "/signout",
+  cookieController.unsetCookies,
+  questionController.setInactive,
+  (_req, res) => {
+    res.status(200).redirect("/");
+  }
+);
 
 module.exports = userRouter;
+
