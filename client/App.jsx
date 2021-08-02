@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import MainAppContainer from './containers/MainAppContainer';
-//import './stylesheets/styles.css';
+import './stylesheets/styles.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const RoutingApp = props => {
   return (
