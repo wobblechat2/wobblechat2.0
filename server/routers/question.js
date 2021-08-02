@@ -9,18 +9,32 @@ router.get('/', questionController.getQuestions, (req,res) => {
   return res.status(200).json(res.locals.questions);
 })
 
-//create new question
-router.post('/', /*userController.getId,*/ questionController.postQuestion, /*questionController.openChat,*/ (req,res) => {
-  return res.status(200).json(res.locals.newQuestion);
+//create new question ----> 
+router.post('/', questionController.postQuestion, questionController.getQuestions, (req,res) => {
+  return res.status(200).json({
+    newQuestion: res.locals.questions[0].url,
+    questions: res.locals.questions,
+  });
 })
 
 //get all messages when user re-enters a previous chat
-router.get('/messages/:id', questionController.getMessages, /*questionController.putMessages,*/ (req,res) => {
+router.get('/messages/:id', /* join chat */ questionController.getMessages, /*questionController.putMessages,*/ (req,res) => {
   return res.status(200).json(res.locals.messages);
 })
 
-// -------> nothing happens on close chat....
-// router.get('/question/:id', questionController.closeChat, (req,res) => {
+// ------> upon Login, a user's chat need to be set to Active and automatically join window
+// -------> on logout, user's chat needs to be Inactive
+
+// --------> openChat
+// -------> once a user clicks a question to open chat, 
+// --------> the question Creator's chat window needs to be opened
+// --------> if a user has an open chat, user cannot click other questions
+
+// -------> messages need a Creator relationship
+
+// -------> close chat should create a message "<user> has left the chat"
+// --------> and set isActve to false
+// router.post('/message/:id', questionController.closeChat, (req,res) => {
 //   return res.status(200).json(res.locals.chatId);
 // })
 

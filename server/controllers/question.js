@@ -6,51 +6,45 @@ const questionController = {};
 
 //getQuestions should return an array of Questions
 questionController.getQuestions = (req, res, next) => {
-  const questionQuery = 'select id,title,description,url from questions where isAnswered = false'
-  // console.log("response: ", res);
-  // console.log("requestion: ",  req);
+  const questionQuery = 'SELECT id,title,description,url,isOpen,isAnswered,creator FROM questions WHERE isAnswered = false ORDER BY id DESC'
   pool
     .query(questionQuery)
-    .then(questions => {
-      // console.log("response: ", questions);
-      const {id, title, description, url} = questions.rows[0];
-      res.locals.questions = questions;
-    })
-    .catch(err => {
-      return next({
-          status: 500,
-          message: "Error querying Questions",
-          error: err
-      });
-    })
-  return next();
-}
-
-//postQuestion should create a Question and next() will call openChat
-questionController.postQuestion = (req, res, next) => {
-  // ----------> url comes from websockets
-  //userid comes from user controller (prev step in create question). 
-  const url = 'testKenny10';
-  const title = 'testingPostController';
-  const description = 'test';
-  const creator = '2';
-  const params = [url,title,description,creator];
-  const insertQuestion = 'INSERT INTO questions (url,title,description,creator) VALUES ($1,$2,$3,$4) RETURNING *'
-
-  pool
-    .query(insertQuestion, params)
-    .then(newQuestion => {
-      // console.log(newQuestion);
-      res.locals.newQuestion = newQuestion;
+    .then(data => {
+      res.locals.questions = data.rows;
+      return next();
     })
     .catch(err => {
       return next({
         status: 500,
+        message: "Error querying Questions",
+      });
+    })
+}
+
+//postQuestion should create a Question and next() will call openChat
+questionController.postQuestion = (req, res, next) => {
+  // ----------> url comes from websockets - 
+  //userid comes from user controller (prev step in create question). 
+
+  const url = "testKenny22"
+  const { ssid } = req.cookies; // { id: 7 }
+  const { title, description } = req.body;
+  const params = [url,title,description,ssid];
+  const insertQuestion = 'INSERT INTO questions (url,title,description,creator) VALUES ($1,$2,$3,$4) RETURNING questions'
+
+  pool
+    .query(insertQuestion, params)
+    .then(data => {
+      return next();
+    })
+    .catch(err => {
+      console.log(err)
+      return next({
+        status: 500,
         message: "Error creating Questions",
-        error: err
       })
     })
-  return next();
+
 }
 
 //openChat should... send a req to Websockets? 
@@ -65,16 +59,15 @@ questionController.getMessages = (req, res, next) => {
     .then(messages => {
       if(!messages) return next();
       res.locals.messages = messages;
+      return next();
       // console.log(messages);
     })
     .catch(err => {
       return next({
         status: 500,
         message: "Error grabbing messages",
-        error: err
       })
     })
-  return next();
 }
   
 //   //isActive is true ------> is this a put? 
@@ -102,7 +95,6 @@ questionController.putAnswered = (req, res, next) => {
       return next({
         status: 500,
         message: "Error setting isAnswered to true",
-        error: err
       })
     })
   return next();
