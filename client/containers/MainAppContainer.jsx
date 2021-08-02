@@ -13,6 +13,7 @@ class MainAppContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      questionBool: true,
       //has data been retrieved from the backend yet?
       fetchedData: false,
       //question data, an array of question objects 
@@ -21,20 +22,18 @@ class MainAppContainer extends Component {
 }
 
   componentDidMount() {
- 
-    //retrieving question data from db via express
-    fetch('/questions') 
-      .then(res => res.json())
-      .then((questionData) => {
-        //input validation
-        if (!Array.isArray(questionData)) questionData = [];
-        //update state with fetched data
-        return this.setState({
-          questions: questionData,
-          fetchedData: true
-        });
-      })
-      .catch(err => console.log('MainAppContainer.componentDidMount has error when making fetch request for questionsData: ERROR: ', err));
+    // retrieving question data from db via express
+      fetch('/api/questions') 
+        .then(res => res.json())
+        .then((questionData) => {
+          //input validation
+          if (!Array.isArray(questionData)) questionData = [];
+          //update state with fetched data
+          this.setState({fetchedData: true, questions: questionData});
+        })
+        .catch(err => console.log('MainAppContainer.componentDidMount has error when making fetch request for questionsData: ERROR: ', err));
+    }
+  
     
   // const dummyQuestionData = [
   //   {
@@ -67,9 +66,18 @@ class MainAppContainer extends Component {
 
 
 
+// }
+
+
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state,callback)=>{
+        return;
+    };
 }
 
   render() {
+
     if (!this.state.fetchedData) return (
       <div>
         <h2>Loading data, please wait...</h2>
@@ -79,9 +87,13 @@ class MainAppContainer extends Component {
     const { questions } = this.state;
     //if fetch request retrieved nothing, there is nothing to display
     if (!questions) return null;
-    if (!questions.length) return (
+    if (!questions.length) {
+      // console.log(this.state);
+      return (
       <div>Sorry, no questions to display</div>
-    );
+    
+    )
+      };
 
     return (
 <>
@@ -93,7 +105,7 @@ class MainAppContainer extends Component {
 
 
 
-<Card classname="chat-style">
+<Card className="chat-style">
 <Chat />
 </Card>
 <br/>
