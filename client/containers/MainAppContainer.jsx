@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // import CastleCard from './CastleCard';
 // import DetailsModal from './DetailsModal';
 import QuestionsContainer from './QuestionsContainer';
+import CreateQuestionForm from '../components/CreateQuestionForm';
 
 class MainAppContainer extends Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class MainAppContainer extends Component {
 <div>
 <Link to={'/signout'}><button type="button"> Sign out </button></Link>
 <QuestionsContainer  questions={this.state.questions} />
+<CreateQuestionForm />
 </div>          
 
 )
