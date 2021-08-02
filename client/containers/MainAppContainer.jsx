@@ -5,6 +5,8 @@ import QuestionsContainer from './QuestionsContainer';
 import Chat from '../components/Chat';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { createPortal } from 'react-dom';
+import fetch from 'node-fetch';
 
 
 class MainAppContainer extends Component {
@@ -20,48 +22,48 @@ class MainAppContainer extends Component {
 
   componentDidMount() {
  
-    // //retrieving question data from db via express
-    // fetch('/api/questions') 
-    //   .then(res => res.json())
-    //   .then((questionData) => {
-    //     //input validation
-    //     if (!Array.isArray(questionData)) questionData = [];
-    //     //update state with fetched data
-    //     return this.setState({
-    //       questions: questionData,
-    //       fetchedData: true
-    //     });
-    //   })
-    //   .catch(err => console.log('MainAppContainer.componentDidMount has error when making fetch request for questionsData: ERROR: ', err));
+    //retrieving question data from db via express
+    fetch('/questions') 
+      .then(res => res.json())
+      .then((questionData) => {
+        //input validation
+        if (!Array.isArray(questionData)) questionData = [];
+        //update state with fetched data
+        return this.setState({
+          questions: questionData,
+          fetchedData: true
+        });
+      })
+      .catch(err => console.log('MainAppContainer.componentDidMount has error when making fetch request for questionsData: ERROR: ', err));
     
-  const dummyQuestionData = [
-    {
-      questionId: 1,
-      isActive: true,
-      title: 'Why is the sky blue?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      chatURL: 'http://www.yourchat.com?id=56'
-   },
-   {
-    questionId: 2,
-    isActive: true,
-    title: 'Where do babies come from?',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    chatURL: 'http://www.yourchat.com?id=56'
-  },
-   {
-    questionId: 3,
-    isActive: false,
-    title: 'How does react work?',
-    description: 'Hodor. Hodor hodor, hodor. Hodor hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    chatURL: 'http://www.yourchat.com?id=56'
-  }
-  ];
+  // const dummyQuestionData = [
+  //   {
+  //     questionId: 1,
+  //     isActive: true,
+  //     title: 'Why is the sky blue?',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  //     chatURL: 'http://www.yourchat.com?id=56'
+  //  },
+  //  {
+  //   questionId: 2,
+  //   isActive: true,
+  //   title: 'Where do babies come from?',
+  //   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  //   chatURL: 'http://www.yourchat.com?id=56'
+  // },
+  //  {
+  //   questionId: 3,
+  //   isActive: false,
+  //   title: 'How does react work?',
+  //   description: 'Hodor. Hodor hodor, hodor. Hodor hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  //   chatURL: 'http://www.yourchat.com?id=56'
+  // }
+  // ];
    
-  this.setState({
-    questions: dummyQuestionData,
-    fetchedData: true
-  })
+  // this.setState({
+  //   questions: dummyQuestionData,
+  //   fetchedData: true
+  // })
 
 
 

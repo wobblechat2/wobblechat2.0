@@ -8,30 +8,32 @@ const QuestionsContainer = ({ questions }) => {
   //questions object passed down as prop from MainAppContainer
   //  const [{ questionId, isActive, title, description, chatURL }] = questions;
 
-  const activeQuestionObjects = questions.filter(question => question.isActive === true).map(
-    ({ questionId, isActive, title, description, chatURL }, i) => {
+
+
+  const activeQuestionObjects = questions.filter(question => question.isOpen === true).map(
+    ({ id, title, description, url, creator }) => {
       return (
         <QuestionCard
-          key={i}
-          questionId={questionId}
+          key={id}
           title={title}
           description={description}
-          chatURL={chatURL}
+          creator={creator}
+          chatURL={url}
         />
       );
     }
   );
 
-  const inactiveQuestionObjects = questions.filter(question => question.isActive === false).map(
-    ({ questionId, isActive, title, description, chatURL }, i) => {
+  const inactiveQuestionObjects = questions.filter(question => question.isOpen === false).map(
+    ({ id, title, description, url, creator }) => {
       return (
         <QuestionCard
-          key={i}
-          questionId={questionId}
-          title={title}
-          description={description}
-          chatURL={chatURL}
-        />
+        key={id}
+        title={title}
+        description={description}
+        creator={creator}
+        chatURL={url}
+      />
       );
     }
   );
