@@ -1,15 +1,21 @@
-import React from  'react';
-import { Redirect, Link } from 'react-router-dom';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import Auth from "./Auth";
 
-const ProtectedRoute = (props) => {
-  //component to be rendered by protected route
-  const Component = props.component;
-  //user's authentication status
-  const isAuthenticated = true;
-
-  //if user is authenticated, return component that is being passed down as prop, if not send user to login component
-  return isAuthenticated ? ( <Component /> ) : ( <Redirect to={{pathname: '/login'}} /> );
-    
+function ProtectedRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return Auth.isAuthenticated() === true ? (
+          children
+        ) : (
+          <Redirect to="/login" />
+        );
+      }}
+    />
+  );
 }
 
 export default ProtectedRoute;
+

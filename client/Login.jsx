@@ -1,44 +1,73 @@
-import React from 'react';
-import {useState} from 'react';
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import auth from "./Auth";
 
 const Login = (props) => {
-  const [userData, setUserData] = useState({ username: '', password: ''});
-  const [errorMessage, setErrorMessage] = useState({ value: '' });
+  const [userData, setUserData] = useState({ username: "", password: "" });
+  const history = useHistory();
 
-  //custom hook to update state with current value
-  const handleInputChange = (e) => {
-    setUserData((prevState) => {
-      return {
-        ...prevState,
-        [e.target.value]: e.target.value
-      }
-    })
-  }
+  const handleUsernameInputChange = (e) => {
+    e.persist();
+    setUserData((userData) => ({
+      ...userData,
+      username: e.target.value,
+    }));
+  };
+
+  const handlePasswordInputChange = (e) => {
+    e.persist();
+    setUserData((userData) => ({
+      ...userData,
+      password: e.target.value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch("/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: userData.username,
+        password: userData.password,
+      }),
+    })
+      .then((response) => {
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log("Error making fetch request", err);
+      });
+    history.push("/");
+  };
 
-    //for testing purposes only
-    userData.username === 'admin' && userData.password === 'password' ?
-      //user is now authenticated and redirected to index(mainappcontainer)
-      ( window.location.pathname = '/' ) :
-      setErrorMessage((prevState) => ({ value: 'Invalid credentials' }));
-
-  }
   return (
-  <div>
-    <h1>Welcome, please sign in.</h1>
-    <form>
-      <label>Username</label>
-      <input type="text" name="username" onChange={(e) => handleInputChange(e)} />
-      <label>Password</label>
-      <input type="text" name="password" onChange={(e) => handleInputChange(e)} />
-      <button type="submit" onClick={handleSubmit}> Login </button>
-    </form>
-  </div>
-  )
-}
+    <div>
+      <h1>Welcome, please sign in.</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          id="username"
+          className="form-field"
+          type="text"
+          name="username"
+          value={userData.username}
+          onChange={handleUsernameInputChange}
+        />
+        <input
+          id="username"
+          className="form-field"
+          type="text"
+          name="username"
+          value={userData.password}
+          onChange={handlePasswordInputChange}
+        />
+        <button type="submit" value="submit" />
+      </form>
+    </div>
+  );
+};
 
 export default Login;
