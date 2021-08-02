@@ -18,4 +18,3 @@ function ProtectedRoute({ children, ...rest }) {
 }
 
 export default ProtectedRoute;
-
