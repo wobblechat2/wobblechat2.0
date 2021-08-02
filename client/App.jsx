@@ -19,6 +19,7 @@ const RoutingApp = props => {
         <Switch>
           <Route path="/login" 
           component={Login} />
+          <ProtectedRoute exact={true} path='/' component={MainAppContainer} />
           
           {/*<Route
             exact
