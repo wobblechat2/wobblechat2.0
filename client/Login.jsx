@@ -46,7 +46,7 @@ const Login = (props) => {
 
   return (
     <div>
-      <h1>Welcome, please sign in.</h1>
+      <h1>Welcome, please log in.</h1>
       <form onSubmit={handleSubmit}>
         <input
           id="username"

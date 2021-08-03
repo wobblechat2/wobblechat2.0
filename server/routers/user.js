@@ -15,8 +15,8 @@ userRouter.post(
 );
 
 userRouter.post(
-  "/signin",
-  userController.signInUser,
+  "/login",
+  userController.loginUser,
   cookieController.setCookies,
   (_req, res) => {
     res.status(200).redirect("/");
@@ -25,7 +25,7 @@ userRouter.post(
 
 // Eliminates cookie and sends user back to home page.
 userRouter.post(
-  "/signout",
+  "/logout",
   cookieController.unsetCookies,
   questionController.setInactive,
   (_req, res) => {
@@ -34,4 +34,3 @@ userRouter.post(
 );
 
 module.exports = userRouter;
-

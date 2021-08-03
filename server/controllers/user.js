@@ -38,7 +38,7 @@ userController.createUser = async (req, res, next) => {
   return next();
 };
 
-userController.signInUser = async (req, res, next) => {
+userController.loginUser = async (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password)
     return next(new Error("Need to supply username and password"));
@@ -55,7 +55,6 @@ userController.signInUser = async (req, res, next) => {
         message: "That username and password is not valid.",
       });
 
-      
     user = rows[0];
   } catch (err) {
     return next({

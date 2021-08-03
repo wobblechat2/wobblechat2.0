@@ -1,6 +1,6 @@
 const cookieController = {};
 
-// Set cookie on user (of their ID) upon successful sign up or sign in.
+// Set cookie on user (of their ID) upon successful sign up or log in.
 cookieController.setCookies = (_req, res, next) => {
   try {
     const { id } = res.locals;
