@@ -1,6 +1,6 @@
 {
   "name": "wobblechat",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An anonymous, lightweight chatroom for developers.",
   "main": "webpack.config.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "NODE_ENV=production webpack",
     "start": "concurrently 'npm run client:start' 'npm run server:start'",
     "client:start": "NODE_ENV=development webpack serve --open",
-    "server:start": "NODE_ENV=development nodemon server/app.js"
+    "server:start": "NODE_ENV=development nodemon server/app.js",
+    "dev": "NODE_ENV=development nodemon server/app.js & NODE_ENV=development webpack serve --open"
   },
   "repository": {
     "type": "git",
@@ -22,17 +23,28 @@
   },
   "homepage": "https://github.com/WobbleChat/wobblechat#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.15",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.0.2",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "dotenv-webpack": "^7.0.3",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
     "js-cookie": "^3.0.0",
+    "node-fetch": "^2.6.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.4",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
+    "socket.io": "^4.1.3",
+    "socket.io-client": "^4.1.3",
     "webpack": "^5.47.1"
   },
   "devDependencies": {

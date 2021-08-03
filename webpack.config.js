@@ -1,11 +1,12 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: "./client/index.js",
+  entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
   },
   mode: process.env.NODE_ENV, // "development" or "production"
   module: {
@@ -13,9 +14,9 @@ module.exports = {
       {
         test: /\.jsx?/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
@@ -24,26 +25,27 @@ module.exports = {
         //test: /\.s[ac]ss$/i,
         test: /\.css$/i,
 
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./client/index.html",
+      template: './client/index.html',
     }),
+    new Dotenv(),
   ],
   devServer: {
     proxy: {
-      "/api/**": {
-        target: "http://localhost:3000",
+      '/api/**': {
+        target: 'http://localhost:3000',
         secure: false,
-        logLevel: "debug",
+        logLevel: 'debug',
       },
     },
   },
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
 };
