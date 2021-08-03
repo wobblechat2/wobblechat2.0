@@ -1,12 +1,10 @@
 import React, { Component, useState, useEffect } from "react"; // ---> import useState, useEffect
 import { Link } from "react-router-dom";
+import { set } from "js-cookie";
 
 import QuestionsContainer from "./QuestionsContainer";
 import CreateQuestionForm from "../components/CreateQuestionForm";
 import Chat from "../components/Chat";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { set } from "js-cookie";
 
 
 const MainAppContainer = () => {
@@ -58,35 +56,45 @@ const MainAppContainer = () => {
       return <div>Sorry, no questions to display</div>;
     }
   }, [questions]) 
-  
 
-    return (
-      <>
-        <div className="top-menu-container">
-          <Link to={"/"} className="brandname">
-            Wobblechat
+  // you can pass down setFetchedData
+  const callback = () => {
+    setFetchedData(false);
+  }
+
+
+  return (
+    <div className="mainContainer">
+
+      <div className="top-menu-container">
+        <Link to={"/"} className="brandname">
+          Wobblechat
+        </Link>
+        <div>
+          <Link to={"/create"}>
+            <button type='button' className='buttons'>Ask a question</button>
           </Link>
-          <div>
-            <Link to={"/create"}>
-              <Button variant="primary">Ask a question</Button>
-            </Link>
-            &nbsp;&nbsp;
-            <Link to={"/logout"}>
-              <Button variant="secondary">Sign out</Button>
-            </Link>
-          </div>
+          &nbsp;&nbsp;
+          <Link to={"/logout"}>
+            <button type='button' className='w3-button'>Sign out</button>
+          </Link>
         </div>
+      </div>
 
-        <Card className="chat-style">
-          <Chat />
-        </Card>
-        <br />
+      <div className='questionCreate'>
+        <CreateQuestionForm changeFetched={callback}/>
+      </div>
 
+      <div className='questionContainer'>
         <QuestionsContainer questions={questions} />
-        <CreateQuestionForm />
-      </>
-    );
-  // }
+      </div>
+
+      <div className="chatContainer">
+        <Chat />
+      </div>        
+
+    </div>
+  );
 }
 
 export default MainAppContainer;
