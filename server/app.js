@@ -20,7 +20,7 @@ app.get("/api/hello", (req, res) => {
 
 app.use("/api/users", userRouter);
 app.use("/api/questions", questionRouter);
-app.use("/messages", messageRouter);
+app.use("/api/messages", messageRouter);
 // //route handler for main page
 // app.get('/', (req,res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/index.html'));

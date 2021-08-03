@@ -10,10 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
   return (
     <Router>
-      {/* <Route path="/login" component={Login} /> */}
-      {/* <ProtectedRoute exact={true} path="/"> */}
-      <MainAppContainer />
-      {/* </ProtectedRoute> */}
+      <Route path="/login" component={Login} />
+      <ProtectedRoute exact={true} path="/">
+        <MainAppContainer />
+      </ProtectedRoute>
     </Router>
   );
 };
