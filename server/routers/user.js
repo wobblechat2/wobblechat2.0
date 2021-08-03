@@ -19,7 +19,7 @@ userRouter.post(
   userController.loginUser,
   cookieController.setCookies,
   (_req, res) => {
-    res.status(200).redirect("/");
+    res.status(200).send({ id: res.locals.id });
   }
 );
 
@@ -32,5 +32,6 @@ userRouter.post(
     res.status(200).redirect("/");
   }
 );
+
 
 module.exports = userRouter;
