@@ -3,6 +3,7 @@ import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
+import MessageService from '../service/messageService';
 
 const Chat = ({roomId, setClickChat}) => {
 
