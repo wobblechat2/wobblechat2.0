@@ -22,15 +22,9 @@ module.exports = {
       },
       {
         //Andrew: Not sure how to load in css files but trying this way since it seems the former version only processed scss files...
-<<<<<<< HEAD
         test: /\.s[ac]ss$/i,
         // test: /\.css$/i,
 
-=======
-        // test: /\.css$/i,
-        test: /\.s[ac]ss$/i,
-        exclude: /node_modules/,
->>>>>>> d927adfb838d62655e9c57d1b1ebc248e8e25034
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],

@@ -4,7 +4,7 @@ import socket, { io } from 'socket.io-client';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
 
-const Chat = (props) => {
+const Chat = ({roomId}) => {
 
   // websocket initialize from Hazel
   // const socketIO = socket('ws://localhost:3000', {
@@ -18,7 +18,7 @@ const Chat = (props) => {
   // socketIO.on('chatroom1', (message) => console.log(message));
 
   // const { roomId } = props.match.params;
-  const { roomId } = props.roomId;
+
   // console.log('roomid =',roomId);
   // console.log('props =',props);
   const { messages, sendMessage } = useChat(1);
@@ -30,16 +30,19 @@ const Chat = (props) => {
     setNewMessage(e.target.value);
   }
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (e) => {
+    e.preventDefault();
     sendMessage(newMessage);
     setNewMessage('');
   }
 
   return (
     <div className='chatbox'>
+      <div className='chatbox_header'>
+        <button className='chatbox_close'>Close</button>
+      </div>
       <h1 className="room-name">Chatroom: {roomId}</h1>
-      <div className="messages-container">
-        <ol className="messages-list">
+        <ul className="messages-list">
           {messages.map((message, i) => (
             <li
               key={i}
@@ -50,29 +53,17 @@ const Chat = (props) => {
               {message.body}
             </li>
           ))}
-        </ol>
-      </div>
+        </ul>
       <textarea
         value={newMessage}
         onChange={handleNewMessageChange}
         placeholder="Write message..."
-        className="new-message-input-field"
+        id="chat_input "
       />
-      <button onClick={handleSendMessage} className="send-message-button">
+      <button onClick={handleSendMessage} id="chat_button">
         Send
       </button>
-
-      {/* <div className="App">
-        <ul id="messages">
-          <li>Message 1</li>
-          <li>Message 2</li>
-          <li>Message 3</li>
-          <li>Message 4</li>
-        </ul>
-        <form id="form-chat" action="">
-          <input id="input-chat" /><button>Send</button>
-        </form>
-      </div> */}
+      <div className='chatbox_footer'></div>
     </div>
   );
 }
