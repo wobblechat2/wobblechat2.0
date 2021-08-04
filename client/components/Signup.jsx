@@ -5,10 +5,15 @@ import { faAmericanSignLanguageInterpreting } from '@fortawesome/free-solid-svg-
 
 const Signup = () => {
 
+    const login = () => {
+        fetch('/api/oAuth')
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
 
     return( 
         <div className='googleAuth'>
-            <Link to='/google'>Sign In</Link>
+            <button id='loginButton' onClick={login} className='btn'>Sign In</button>
         </div>
         )
 };

@@ -9,13 +9,13 @@ oAuthRouter.get('/', (req, res) => res.send('Example Home page!'));
 oAuthRouter.get('/failed', (req, res) => res.send('You Failed to log in!'));
 
 // In this route you can see that if the user is logged in u can acess his info in: req.user
-oAuthRouter.get('/good', loggedInController.check, (req, res) => res.sendFile(path.join(__dirname, '../../client/containers/MainAppContainer.jsx')));
+oAuthRouter.get('/good', loggedInController.check, (req, res) => res.status(200).json('test'));
 
 //Logout endpoint
 oAuthRouter.get('/logout', (req, res) => {
     req.session = null;
     req.logout();
-    res.redirect('/');
+    res.redirect('/api');
   });
 
 module.exports = oAuthRouter;

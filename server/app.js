@@ -35,17 +35,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Route Handler
+app.get("/api/oAuth", (req,res) => {res.redirect('/api/google')});
 app.use("/api/users", userRouter);
 app.use("/api/questions", questionRouter);
 app.use("/api/messages", messageRouter);
-app.use("/", oAuthRouter);
+app.use("/api", oAuthRouter);
 
 // Auth Routes
-app.get('/google', passport.authenticate('google', { scope: ['openid'] }));
-app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+app.get('/api/google', passport.authenticate('google', { scope: ['openid'] }));
+app.get('/api/google/callback', passport.authenticate('google', { failureRedirect: '/api/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/good');
+    res.redirect('/api/good');
   }
 );
 
