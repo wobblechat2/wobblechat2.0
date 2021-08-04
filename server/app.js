@@ -13,6 +13,7 @@ const globalErrorHandler = require('./routers/errors');
 const questionRouter = require('./routers/question.js');
 const messageRouter = require('./routers/message.js');
 const { Server } = require('socket.io');
+const { instrument } = require('@socket.io/admin-ui');
 
 //parsing request body
 app.use(express.json());
@@ -39,13 +40,22 @@ const server = app.listen(3000, () => {
   console.log('Express server listening on port 3000.');
 });
 
+
 // Since we use app.listen, and get the result to server variable, we will declare socket here.
 const socketIO = new Server(server, {
   cors: {
     origin: "*",
+    credentials: true,
   }
 });
-// { cors: { origin: '*' } }
+
+//socket admin
+instrument(socketIO, {
+  auth:false
+});
+
+
+
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 
