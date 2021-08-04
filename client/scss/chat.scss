@@ -1,12 +1,36 @@
 /* Chatroom styling */
 
+.chatbox {
+  position: absolute;
+  top: 6rem;
+  right: 4rem;
+  width: 42rem;
+  height: 40rem;
+  background-color: lighten($background-color, 5%);
+  border-radius: 20px;
+}
+
+#messages {
+  height: 36rem;
+  overflow-y: auto;
+  padding: 2rem 1rem 1rem;
+}
+#messages > li {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+}
+#messages > li:nth-child(odd) {
+  background: #efefef;
+}
+
 #form-chat {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 0.25rem;
+  background-color: $Primary;
+  padding: 0.7rem 0.8rem 1.2rem 0.8rem;
   display: flex;
-  height: 3rem;
+  height: 4.5rem;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
+  border-radius: 0 0 20px 20px;
 }
 #input-chat {
   border: none;
@@ -18,24 +42,21 @@
 #input-chat:focus {
   outline: none;
 }
-#form-chat > button {
-  background: #333;
-  border: none;
+
+#chat_button {
+  background-color: lighten($button-color, 18%);
   padding: 0 1rem;
   margin: 0.25rem;
-  border-radius: 3px;
+  border-radius: 10px;
   outline: none;
-  color: #fff;
 }
 
-#messages {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+#chat_button:hover {
+  background-color: darken($button-color, 15%);
+  color: $font-white;
 }
-#messages > li {
-  padding: 0.5rem 1rem;
-}
-#messages > li:nth-child(odd) {
-  background: #efefef;
+
+#chat_button:focus {
+  background-color: ighten($button-color, 18%);
+  color: $font-white;
 }

@@ -46,14 +46,13 @@ const QuestionsContainer = ({ questions }) => {
   );
 
   return (
-    <div className="question-window">
+    <div className='questionContainer'>
       <div className='activeQs'>
-        <h2> Active questions </h2>
+        <h2 className='question_type'> Active questions </h2>
         {activeQuestionObjects}
       </div>
-      <br />
       <div className='inactiveQs'>
-        <h2> Inactive questions </h2>
+        <h2 className='question_type'> Inactive questions </h2>
         {inactiveQuestionObjects}
       </div>
     </div>

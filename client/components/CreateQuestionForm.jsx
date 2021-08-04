@@ -18,7 +18,9 @@ const CreateQuestionForm = (props) => {
     alert(`This is what was submitted: ${title}`);
   }
 
+
   return (
+    <div className='questionCreate'>
     <form onSubmit={handleSubmit}>
       <label>
         Title:
@@ -42,7 +44,10 @@ const CreateQuestionForm = (props) => {
 
       <li>Question title is: { title } </li>
     </form>
+    </div>
   );
 }
 
 export default CreateQuestionForm;
+
+

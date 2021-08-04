@@ -1,32 +1,7 @@
 /* app container styling */
-body {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background: rgba(22, 22, 22, 0.915);
-  color: black;
-  background-color: rgb(209, 209, 209) !important;
-  padding-bottom: 50px;
-}
 
 .mainSection {
   margin-bottom: 5rem;
-}
-
-.brandname {
-  font-family: 'Faustina';
-  font-size: 40px;
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
-}
-
-.top-menu-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-top: 10px;
 }
 
 .chat-style {
