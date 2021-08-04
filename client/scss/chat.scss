@@ -10,18 +10,18 @@
   border-radius: 20px;
 }
 
-#messages {
+.messages-list {
   height: 36rem;
   overflow-y: auto;
   padding: 2rem 1rem 1rem;
 }
-#messages > li {
+.message-item{
   padding: 0.5rem 1rem;
   margin: 0.5rem 0;
 }
-#messages > li:nth-child(odd) {
-  background: #efefef;
-}
+// #messages > li:nth-child(odd) {
+//   background: #efefef;
+// }
 
 #form-chat {
   background-color: $Primary;
