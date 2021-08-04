@@ -1,9 +1,13 @@
 .loginBorder {
-  width: 100%;
-  margin-top: 15rem;
+  width: 25%;
+  margin-top: 12rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
 
   .loginComp {
     display: flex;
@@ -11,15 +15,14 @@
     align-items: center;
     flex-direction: column;
   }
-  
+
   .form-field {
-    margin-bottom: 0.25rem;
-    padding: 0.1rem 0.5rem;
+    margin-top: 0.3rem;
+    padding: 0.25rem 1.25rem;
   }
 
   .inputBox {
     display: flex;
     flex-direction: column;
   }
-
 }
