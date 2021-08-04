@@ -4,3 +4,4 @@ package-lock.json
 DigiCertGlobalRootCA.crt.pem
 .env
 .eslintrc.js
+.prettierrc.js
