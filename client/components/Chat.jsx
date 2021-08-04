@@ -19,12 +19,12 @@ const Chat = (props) => {
 
   // const { roomId } = props.match.params;
   const { roomId } = props.roomId;
-  console.log('roomid =',roomId);
-  console.log('props =',props);
+  // console.log('roomid =',roomId);
+  // console.log('props =',props);
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
-  console.log('messages =',messages);
-  console.log('newMessage =',newMessage);
+  // console.log('messages =',messages);
+  // console.log('newMessage =',newMessage);
 
   const messagesTest = ['hello', 'hi', 'blah'];
 
