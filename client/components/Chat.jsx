@@ -57,7 +57,7 @@ const Chat = () => {
           <li>Message 4</li>
         </ul>
         <form id="form-chat" action="">
-          <input id="input-chat" /><button>Send</button>
+          <input id="input-chat" /><button id='chat_button'>Send</button>
         </form>
       </div>
     </div>

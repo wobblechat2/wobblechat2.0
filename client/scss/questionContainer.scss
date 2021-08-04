@@ -1,11 +1,57 @@
-.question-container {
+.questionContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  width: 44rem;
+  height: 40rem;
+  padding: 20px;
+  overflow-y: auto;
 }
 
-// .question-window {
-/* background-color: aquamarine; */
-// }
+.question_type {
+  color: darken($Primary, 16%);
+}
+.questionCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.questions {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.question_title {
+  width: 32rem;
+}
+
+.Qcard_button {
+  width: 4rem;
+  height: 1.8rem;
+  background-color: lighten($button-color, 20%);
+  // lighten($Sec 60%);
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 2px;
+  font-size: $font-micro;
+  color: $font-dark;
+  border: 2px solid lighten($button-color, 30%);
+}
+
+.Qcard_button:hover {
+  background-color: darken($button-color, 15%);
+  color: $font-white;
+  border: 2px solid lighten($button-color, 24%);
+}
+
+.Qcard_button:focus {
+  background-color: darken($button-color, 15%);
+  color: $font-white;
+  border: 2px solid lighten($button-color, 24%);
+}
+
+.divider {
+  width: 40rem;
+  height: 0.1rem;
+  background-color: lighten($button-color, 24%);
+}
