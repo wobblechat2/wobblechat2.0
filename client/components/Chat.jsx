@@ -100,21 +100,21 @@ export default Chat;
   //   window.scrollTo(0, document.body.scrollHeight);
   // });
   
-  return (
-    <div className='chatbox'>
-      <div className="App">
-        <ul id="messages">
-          <li>Message 1</li>
-          <li>Message 2</li>
-          <li>Message 3</li>
-          <li>Message 4</li>
-        </ul>
-        <form id="form-chat" action="">
-          <input id="input-chat" /><button id='chat_button'>Send</button>
-        </form>
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div className='chatbox'>
+//       <div className="App">
+//         <ul id="messages">
+//           <li>Message 1</li>
+//           <li>Message 2</li>
+//           <li>Message 3</li>
+//           <li>Message 4</li>
+//         </ul>
+//         <form id="form-chat" action="">
+//           <input id="input-chat" /><button id='chat_button'>Send</button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
 
-export default Chat;
+// export default Chat;
