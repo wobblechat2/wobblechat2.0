@@ -4,7 +4,7 @@ import socket, { io } from 'socket.io-client';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
 
-const Chat = ({roomId}) => {
+const Chat = ({roomId, setClickChat}) => {
 
   // websocket initialize from Hazel
   // const socketIO = socket('ws://localhost:3000', {
@@ -39,30 +39,32 @@ const Chat = ({roomId}) => {
   return (
     <div className='chatbox'>
       <div className='chatbox_header'>
-        <button className='chatbox_close'>Close</button>
+        <h1 className="room-name">Chatroom: {roomId}</h1>
+        <button className='chatbox_close' onClick={setClickChat}>Close</button>
       </div>
-      <h1 className="room-name">Chatroom: {roomId}</h1>
-        <ul className="messages-list">
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={`message-item ${
-                message.ownedByCurrentUser ? "my-message" : "received-message"
-              }`}
-            >
-              {message.body}
-            </li>
-          ))}
-        </ul>
-      <input
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write message..."
-        id="chat_input"
-      />
-      <button onClick={handleSendMessage} id="chat_button">
-        Send
-      </button>
+      <ul className="messages-list">
+        {messages.map((message, i) => (
+          <li
+            key={i}
+            className={`message-item ${
+              message.ownedByCurrentUser ? "my-message" : "received-message"
+            }`}
+          >
+            {message.body}
+          </li>
+        ))}
+      </ul>
+      <div className='chat_inputBtn'>
+        <input
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          placeholder="Write message..."
+          id="chat_input"
+        />
+        <button onClick={handleSendMessage} id="chat_button">
+          Send
+        </button>
+      </div>
       <div className='chatbox_footer'></div>
     </div>
   );

@@ -22,7 +22,7 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
         </div>
         <div className='divider'></div>
       </div>
-      {clickChat && <Chat roomId={1}/>}
+      {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)}/>}
     </>
   );
 };
