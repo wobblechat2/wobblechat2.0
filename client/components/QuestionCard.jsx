@@ -1,50 +1,29 @@
-import React from 'react';
+import React, { Component, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Chat from './Chat';
 // import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 // import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-import { Link } from 'react-router-dom';
 
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
-
-const QuestionCard = (props) => {
+const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
   //props from QuestionsContainer get assigned to each instance of QuestionCard
-  const { id, title, description, url, creator, isOpen } = props;
+  // const { id, title, description, url, creator, isOpen } = props;
+  const [clickChat, setClickChat] = useState(false);
 
-  // console.log(props);
-
-// let answerButton = '';
-
-//   if (isActive===true){
-//    answerButton = '<Button variant="primary">Answer this question</Button>';
-//   }
-
-
-
+  const openChat = () => {
+    if (!clickChat) return setClickChat(true);
+    setClickChat(false);
+  }
   return (
     <>
-
-
-
-
-<Card key={id}>
-  <Card.Body>
-
-<div className="question-container">
-  <Card.Title>{title}</Card.Title>
-  <Button variant="primary" className="min-button">Answer question</Button>
-</div>
-    <Card.Text>
-
-{description}
-          
-
-    </Card.Text>
-  </Card.Body>
-</Card>
-
-</>
-
+      <div className="questionCard">
+        <div className="questions">
+          <p className="question_title">{title}</p>
+          <button className='Qcard_button' onClick={() => openChat()}>Join chat</button>
+        </div>
+        <div className='divider'></div>
+      </div>
+      {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)}/>}
+    </>
   );
 };
 

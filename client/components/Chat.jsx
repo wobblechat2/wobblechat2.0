@@ -1,14 +1,84 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
-
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+import useChat from "./useChat";
+
+const Chat = ({roomId, setClickChat}) => {
+
+  // socketIO.on('chatroom1', (message) => console.log(message));
+
+  // const { roomId } = props.match.params;
+
+  const { messages, sendMessage } = useChat(1);
+  const [newMessage, setNewMessage] = useState('');
+  console.log('messages =',messages);
+  console.log('newMessage =',newMessage);
+
+  const handleNewMessageChange = (e) => {
+    setNewMessage(e.target.value);
+  }
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    sendMessage(newMessage);
+    setNewMessage('');
+  }
+
+  //handle "Enter" key press as acceptable form of input submisison
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSendMessage(e);
+    }
+  }
+
+  return (
+    <div className='chatbox'>
+      <div className='chatbox_header'>
+        <h1 className="room-name">Chatroom: {roomId}</h1>
+        <button className='chatbox_close' onClick={setClickChat}>Close</button>
+      </div>
+      <ul className="messages-list">
+        {messages.map((message, i) => (
+          <li
+            key={i}
+            className={`message-item ${
+              message.ownedByCurrentUser ? "my-message" : "received-message"
+            }`}
+          >
+            {message.body}
+          </li>
+        ))}
+      </ul>
+      <div className='chat_inputBtn'>
+        <input
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          onKeyDown={handleEnterKeyPress}
+          placeholder="Write message..."
+          id="chat_input"
+        />
+        <button onClick={handleSendMessage} id="chat_button">
+          Send
+        </button>
+      </div>
+      <div className='chatbox_footer'></div>
+    </div>
+  );
+}
+
+export default Chat;
 
 
-function Chat() {
+
+
+
+
+
+
+
+
 
   // var socket = io();
 
@@ -31,30 +101,21 @@ function Chat() {
   //   window.scrollTo(0, document.body.scrollHeight);
   // });
   
+//   return (
+//     <div className='chatbox'>
+//       <div className="App">
+//         <ul id="messages">
+//           <li>Message 1</li>
+//           <li>Message 2</li>
+//           <li>Message 3</li>
+//           <li>Message 4</li>
+//         </ul>
+//         <form id="form-chat" action="">
+//           <input id="input-chat" /><button id='chat_button'>Send</button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
 
-    return (
-
-      <>
-
- 
- 
-
-      <div className="App">
-      <ul id="messages">
-        <li>Message 1</li>
-        <li>Message 2</li>
-        <li>Message 3</li>
-        <li>Message 4</li>
-      </ul>
-    <form id="form-chat" action="">
-      <input id="input-chat" /><button>Send</button>
-    </form>
-      </div>
-
-
-</>
-
-    );
-}
-
-export default Chat;
+// export default Chat;

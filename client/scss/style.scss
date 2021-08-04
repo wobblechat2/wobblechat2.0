@@ -1,0 +1,74 @@
+/* reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+body {
+  color: black;
+  background-color: lighten($Primary, 68%);
+}
+
+html {
+  font: 100% 'Source Sans Pro', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  font-family: 'Faustina';
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+small {
+  font-size: 1.1rem;
+}
+
+figure {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button,
+button:focus {
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+}
+
+input {
+  outline: none;
+  padding: 5px;
+}
