@@ -4,7 +4,7 @@ import socket, { io } from 'socket.io-client';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
 
-const Chat = ({roomId}) => {
+const Chat = ({roomId, setClickChat}) => {
 
   // websocket initialize from Hazel
   // const socketIO = socket('ws://localhost:3000', {
@@ -40,7 +40,7 @@ const Chat = ({roomId}) => {
     <div className='chatbox'>
       <div className='chatbox_header'>
         <h1 className="room-name">Chatroom: {roomId}</h1>
-        <button className='chatbox_close'>Close</button>
+        <button className='chatbox_close' onClick={setClickChat}>Close</button>
       </div>
       <ul className="messages-list">
         {messages.map((message, i) => (
