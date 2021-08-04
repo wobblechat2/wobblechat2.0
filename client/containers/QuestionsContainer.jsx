@@ -32,30 +32,30 @@ const QuestionsContainer = ({ questions }) => {
     ({ id, title, description, url, creator, isopen }) => {
       // chrome dev tools is showing "isopen" as lowercase for some reason
       if(!isopen){
-      return (
-        <QuestionCard
-        key={id}
-        title={title}
-        description={description}
-        creator={creator}
-        chatURL={url}
-      />
-      );
+        return (
+          <QuestionCard
+            key={id}
+            title={title}
+            description={description}
+            creator={creator}
+            chatURL={url}
+          />
+        );
+      }
     }
-  }
   );
 
   return (
     <div className="question-window">
-      <h2>
-      Active questions </h2>
-      {activeQuestionObjects}
-<br />
-      <h2>
-      Inactive questions </h2>
-      {inactiveQuestionObjects}
-
-
+      <div className='activeQs'>
+        <h2> Active questions </h2>
+        {activeQuestionObjects}
+      </div>
+      <br />
+      <div className='inactiveQs'>
+        <h2> Inactive questions </h2>
+        {inactiveQuestionObjects}
+      </div>
     </div>
   );
 };

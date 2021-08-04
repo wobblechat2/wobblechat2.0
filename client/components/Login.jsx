@@ -49,6 +49,7 @@ const Login = (props) => {
   return (
     <div className="loginComp">
       <h1>Welcome, please log in.</h1>
+      <a href="/api/google" class="button">Sign in Google</a>
       <form onSubmit={handleSubmit}>
         <input
           id="username"
