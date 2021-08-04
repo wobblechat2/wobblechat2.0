@@ -23,12 +23,8 @@ const Chat = (props) => {
   // console.log('props =',props);
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
-  // console.log('messages =',messages);
-  // console.log('newMessage =',newMessage);
-
-  const messagesTest = ['hello', 'hi', 'blah'];
-
-
+  console.log('messages =',messages);
+  console.log('newMessage =',newMessage);
 
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);

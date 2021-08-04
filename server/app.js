@@ -40,7 +40,11 @@ const server = app.listen(3000, () => {
 });
 
 // Since we use app.listen, and get the result to server variable, we will declare socket here.
-const socketIO = new Server(server);
+const socketIO = new Server(server, {
+  cors: {
+    origin: "*",
+  }
+});
 // { cors: { origin: '*' } }
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
