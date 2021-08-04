@@ -47,30 +47,33 @@ const Login = (props) => {
   };
 
   return (
-    <div className="loginComp">
-      <h1>Welcome, please log in.</h1>
-      <a href="/api/google" class="button">Sign in Google</a>
-      <form onSubmit={handleSubmit}>
-        <input
-          id="username"
-          className="form-field"
-          type="text"
-          name="username"
-          value={userData.username}
-          onChange={handleUsernameInputChange}
-        />
-        <input
-          id="username"
-          className="form-field"
-          type="text"
-          name="username"
-          value={userData.password}
-          onChange={handlePasswordInputChange}
-        />
-        <input type="submit" value="submit" />
-      </form>
-      <Signup/>
+    <div className='loginBorder'>
+      <div className="loginComp">
+        <h1>Welcome, please log in.</h1>
+        <a href="/api/google" class="button">Sign in Google</a>
+        <form onSubmit={handleSubmit}>
+          <input
+            id="username"
+            className="form-field"
+            type="text"
+            name="username"
+            value={userData.username}
+            onChange={handleUsernameInputChange}
+          />
+          <input
+            id="username"
+            className="form-field"
+            type="text"
+            name="username"
+            value={userData.password}
+            onChange={handlePasswordInputChange}
+          />
+          <input type="submit" value="submit" />
+        </form>
+        <Signup/>
+      </div>
     </div>
+    
   );
 };
 
