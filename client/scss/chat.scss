@@ -11,17 +11,23 @@
 }
 
 .chatbox_header {
+  display: flex;
+  flex-direction: row;
   background-color: lighten($Primary, 5%);
   width: 42rem;
   height: 3rem;
   border-radius: 20px 20px 0 0 ;
 }
 
-.chatbox_footer {
-  background-color: lighten($Primary, 5%);
-  width: 42rem;
-  height: 3rem;
-  border-radius: 0 0 20px 20px;
+.room-name {
+  margin: 1rem;
+  display: flex;
+  font-size: $font-medium;
+  justify-self: center;
+}
+
+.chatbox-close {
+  justify-self: end;
 }
 
 .messages-list {
@@ -34,13 +40,18 @@
   margin: 0.5rem 0;
 }
 
+.chat_inputBtn {
+  display: flex;
+}
+
 #chat_input {
   border: none;
   padding: 0 1rem;
   outline: none;
-  height: 2rem;
-  
-
+  height: 3rem;
+  width: 39rem;
+  overflow-y: auto;
+  overflow-wrap: normal;
 }
 
 #chat_button {
@@ -59,6 +70,14 @@
 #chat_button:focus {
   background-color: ighten($button-color, 18%);
   color: $font-white;
+}
+
+
+.chatbox_footer {
+  background-color: lighten($Primary, 5%);
+  width: 42rem;
+  height: 3rem;
+  border-radius: 0 0 20px 20px;
 }
 
 // #input-chat:focus {
