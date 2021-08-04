@@ -43,7 +43,11 @@ const server = app.listen(3000, () => {
 const socketIO = new Server(server, {
   cors: {
     origin: "*",
+<<<<<<< HEAD
   },
+=======
+  }
+>>>>>>> d927adfb838d62655e9c57d1b1ebc248e8e25034
 });
 // { cors: { origin: '*' } }
 
@@ -53,6 +57,7 @@ socketIO.on('connection', (socket) => {
   // console.log('Client is here!');
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
+<<<<<<< HEAD
   
   // const { roomId } = socket.handshake.query;
   socket.join(1);
@@ -66,4 +71,17 @@ socketIO.on('connection', (socket) => {
   socket.on('disconnect', () => {
     socket.leave(1);
   });
+=======
+  const { roomId } =socket.handshake.query;
+  socket.join(1);
+
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    socketIO.in(1).emit(NEW_CHAT_MESSAGE_EVENT, data);
+  });
+
+  socket.on('disconnect', () => {
+    socket.leave(1);
+  });
+
+>>>>>>> d927adfb838d62655e9c57d1b1ebc248e8e25034
 });
