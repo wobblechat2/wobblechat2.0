@@ -1,5 +1,4 @@
 const { Pool } = require("pg");
-const pg = require("pg");
 const our_username = process.env.DBUSERNAME;
 const our_password = process.env.DBPASSWORD;
 const our_database = process.env.DBNAME;
