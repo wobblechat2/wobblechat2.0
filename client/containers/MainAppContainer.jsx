@@ -84,14 +84,15 @@ const MainAppContainer = () => {
       <div className='questionCreate'>
         <CreateQuestionForm changeFetched={callback}/>
       </div>
+      
+      <div className="chatContainer">
+        <Chat roomId={1}/>
+      </div>        
 
       <div className='questionContainer'>
         <QuestionsContainer questions={questions} />
       </div>
 
-      <div className="chatContainer">
-        <Chat roomId={1}/>
-      </div>        
 
     </div>
   );

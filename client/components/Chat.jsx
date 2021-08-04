@@ -41,7 +41,7 @@ const Chat = (props) => {
 
   return (
     <div className='chatbox'>
-      <h1 className="room-name">Room: {roomId}</h1>
+      <h1 className="room-name">Chatroom: {roomId}</h1>
       <div className="messages-container">
         <ol className="messages-list">
           {messages.map((message, i) => (
