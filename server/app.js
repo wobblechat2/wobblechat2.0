@@ -40,11 +40,30 @@ const server = app.listen(3000, () => {
 });
 
 // Since we use app.listen, and get the result to server variable, we will declare socket here.
-const socketIO = new Server(server);
+const socketIO = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 // { cors: { origin: '*' } }
 
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
+
 socketIO.on('connection', (socket) => {
-  console.log('Client is here!');
-  socketIO.emit('chatroom1', 'hi');
-  socketIO.emit('chatroom1', 'Hello');
+  // console.log('Client is here!');
+  // socketIO.emit('chatroom1', 'hi');
+  // socketIO.emit('chatroom1', 'Hello');
+  
+  // const { roomId } = socket.handshake.query;
+  socket.join(1);
+  // listen for new messages
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    socketIO.in(1).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    socketIO.in(1).emit('1', 'check 1 room');
+  });
+  
+  // leave room if user closes socket
+  socket.on('disconnect', () => {
+    socket.leave(1);
+  });
 });
