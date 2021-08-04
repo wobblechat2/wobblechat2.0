@@ -15,9 +15,9 @@ const App = () => {
         <ProtectedRoute exact={true} path="/">
           <MainAppContainer />
         </ProtectedRoute>
-        <ProtectedRoute exact={true} path="/testChat">
+        {/*<ProtectedRoute exact={true} path="/testChat">
           <SocketClientTest />
-        </ProtectedRoute>
+  </ProtectedRoute>*/}
       </Switch>
     </Router>
   );
