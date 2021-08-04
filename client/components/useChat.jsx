@@ -29,7 +29,8 @@ const useChat = (roomId) => {
       socketRef.current.disconnect();
     };
   // });
-  }, [roomId]);
+  }, []);
+// }, [roomId]);
 
   const sendMessage = (messageBody) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {

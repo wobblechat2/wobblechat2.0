@@ -4,23 +4,12 @@ import socket, { io } from 'socket.io-client';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
 
-const Chat = (props) => {
+const Chat = ({roomId, setClickChat}) => {
 
-  // websocket initialize from Hazel
-  // const socketIO = socket('ws://localhost:3000', {
-  //   transports: ['websocket'],
-  // });
-  // socketIO.on('connect_error', (error) => {
-  //   console.log('socket error', error);
-  // });
-
-  // // socketIO.on('connect', () => socketIO.send("It's from client!"));
   // socketIO.on('chatroom1', (message) => console.log(message));
 
   // const { roomId } = props.match.params;
-  const { roomId } = props.roomId;
-  // console.log('roomid =',roomId);
-  // console.log('props =',props);
+
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
   console.log('messages =',messages);
@@ -30,54 +19,66 @@ const Chat = (props) => {
     setNewMessage(e.target.value);
   }
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (e) => {
+    e.preventDefault();
     sendMessage(newMessage);
     setNewMessage('');
   }
 
+  //handle "Enter" key press as acceptable form of input submisison
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSendMessage(e);
+    }
+  }
+
   return (
     <div className='chatbox'>
-      <h1 className="room-name">Chatroom: {roomId}</h1>
-      <div className="messages-container">
-        <ol className="messages-list">
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={`message-item ${
-                message.ownedByCurrentUser ? "my-message" : "received-message"
-              }`}
-            >
-              {message.body}
-            </li>
-          ))}
-        </ol>
+      <div className='chatbox_header'>
+        <h1 className="room-name">Chatroom: {roomId}</h1>
+        <button className='chatbox_close' onClick={setClickChat}>Close</button>
       </div>
-      <textarea
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write message..."
-        className="new-message-input-field"
-      />
-      <button onClick={handleSendMessage} className="send-message-button">
-        Send
-      </button>
-
-      {/* <div className="App">
-        <ul id="messages">
-          <li>Message 1</li>
-          <li>Message 2</li>
-          <li>Message 3</li>
-          <li>Message 4</li>
-        </ul>
-        <form id="form-chat" action="">
-          <input id="input-chat" /><button>Send</button>
-        </form>
-      </div> */}
+      <ul className="messages-list">
+        {messages.map((message, i) => (
+          <li
+            key={i}
+            className={`message-item ${
+              message.ownedByCurrentUser ? "my-message" : "received-message"
+            }`}
+          >
+            {message.body}
+          </li>
+        ))}
+      </ul>
+      <div className='chat_inputBtn'>
+        <input
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          onKeyDown={handleEnterKeyPress}
+          placeholder="Write message..."
+          id="chat_input"
+        />
+        <button onClick={handleSendMessage} id="chat_button">
+          Send
+        </button>
+      </div>
+      <div className='chatbox_footer'></div>
     </div>
   );
 }
 
 export default Chat;
+
+
+
+
+
+
+
+
+
+
 
   // var socket = io();
 
