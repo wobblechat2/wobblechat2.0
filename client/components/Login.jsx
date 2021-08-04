@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import auth from "./Auth";
-import Signup from './components/Signup'
+import Signup from './Signup'
 
 
 const Login = (props) => {
