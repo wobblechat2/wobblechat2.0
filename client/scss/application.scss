@@ -1,2 +1,12 @@
 @import 'variables';
 @import 'style';
+@import 'chat';
+@import 'login';
+@import 'appContainer';
+@import 'questionContainer';
+@import 'navBar.scss';
+@import 'createQuestionForm';
+@import 'signup';
+
+/* Google font "Faustina" for brandname */
+@import url('https://fonts.googleapis.com/css2?family=Faustina&display=swap');

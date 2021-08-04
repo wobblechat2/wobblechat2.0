@@ -42,7 +42,7 @@ const Signup = () => {
 
     return( 
         <React.Fragment>
-            <div className='container'>
+            <div className='googleAuth'>
             <div id='loginButton' className='btn'>Signin</div>
             </div>
         </React.Fragment>

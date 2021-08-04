@@ -5,6 +5,7 @@ import { set } from "js-cookie";
 import QuestionsContainer from "./QuestionsContainer";
 import CreateQuestionForm from "../components/CreateQuestionForm";
 import Chat from "../components/Chat";
+import NavBar from "../components/navBar";
 
 
 const MainAppContainer = () => {
@@ -65,35 +66,8 @@ const MainAppContainer = () => {
 
   return (
     <div className="mainContainer">
-
-      <div className="top-menu-container">
-        <Link to={"/"} className="brandname">
-          Wobblechat
-        </Link>
-        <div>
-          <Link to={"/create"}>
-            <button type='button' className='buttons'>Ask a question</button>
-          </Link>
-          &nbsp;&nbsp;
-          <Link to={"/logout"}>
-            <button type='button' className='buttons'>Sign out</button>
-          </Link>
-        </div>
-      </div>
-
-      <div className='questionCreate'>
-        <CreateQuestionForm changeFetched={callback}/>
-      </div>
-      
-      <div className="chatContainer">
-        <Chat roomId={1}/>
-      </div>        
-
-      <div className='questionContainer'>
-        <QuestionsContainer questions={questions} />
-      </div>
-
-
+      <NavBar/>
+      <QuestionsContainer questions={questions} />       
     </div>
   );
 }
