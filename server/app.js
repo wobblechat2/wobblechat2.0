@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
 
+
 //import routers
 const debugRouter = require('./routers/debug.js');
 const userRouter = require('./routers/user.js');
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV === 'development') app.use(debugRouter);
 app.get('/api/hello', (req, res) => {
   res.status(200).json({ hello: 'world' });
 });
+
 
 app.use("/api/users", userRouter);
 app.use("/api/questions", questionRouter);
