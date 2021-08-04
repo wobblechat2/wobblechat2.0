@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route path="/" component={Login} />
         <ProtectedRoute exact={true} path="/">
           <MainAppContainer />
         </ProtectedRoute>

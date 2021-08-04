@@ -49,7 +49,7 @@ const Login = (props) => {
   return (
     <div className='loginBorder'>
       <div className="loginComp">
-        <h1>Welcome, please log in.</h1>
+        <h1>Wobble Chat V2</h1>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
             <input
@@ -70,7 +70,7 @@ const Login = (props) => {
               value={userData.password}
               onChange={handlePasswordInputChange}
             />
-            <input type="submit" value="Sign In" />
+            <input type="submit" value="Sign In" className="form-field" />
           </div>
         </form>
         <Signup/>
