@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import auth from "./Auth";
+import Signup from './components/Signup'
+
 
 const Login = (props) => {
   const [userData, setUserData] = useState({ username: "", password: "" });
@@ -45,7 +47,7 @@ const Login = (props) => {
   };
 
   return (
-    <div>
+    <div className="loginComp">
       <h1>Welcome, please log in.</h1>
       <a href="/api/google" class="button">Sign in Google</a>
       <form onSubmit={handleSubmit}>
@@ -67,6 +69,7 @@ const Login = (props) => {
         />
         <input type="submit" value="submit" />
       </form>
+      <Signup/>
     </div>
   );
 };
