@@ -76,7 +76,7 @@ const MainAppContainer = () => {
           </Link>
           &nbsp;&nbsp;
           <Link to={"/logout"}>
-            <button type='button' className='w3-button'>Sign out</button>
+            <button type='button' className='buttons'>Sign out</button>
           </Link>
         </div>
       </div>
@@ -90,7 +90,7 @@ const MainAppContainer = () => {
       </div>
 
       <div className="chatContainer">
-        <Chat />
+        <Chat roomId={1}/>
       </div>        
 
     </div>
