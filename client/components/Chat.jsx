@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
 
 import Container from 'react-bootstrap/Container';
@@ -9,6 +9,22 @@ import Card from 'react-bootstrap/Card';
 
 
 function Chat() {
+
+    // // need to connect to the base URL. inside of socket()
+
+  const socketIO = socket('ws://localhost:3000', {
+    transports: ['websocket'],
+  });
+  socketIO.on('connect_error', (error) => {
+    console.log('socket error', error);
+  });
+
+  // socketIO.on('connect', () => socketIO.send("It's from client!"));
+
+  socketIO.on('chatroom1', (message) => console.log(message));
+
+
+
 
   // var socket = io();
 

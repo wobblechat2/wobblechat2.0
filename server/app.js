@@ -12,6 +12,7 @@ const userRouter = require('./routers/user.js');
 const globalErrorHandler = require('./routers/errors');
 const questionRouter = require('./routers/question.js');
 const messageRouter = require('./routers/message.js');
+const { Server } = require('socket.io');
 
 //parsing request body
 app.use(express.json());
@@ -32,6 +33,18 @@ app.use('/api/messages', messageRouter);
 // });
 
 app.use(globalErrorHandler); // Added global error middlware
-app.listen(3000, () => {
+
+// need to save the server from app.listen for socket io
+const server = app.listen(3000, () => {
   console.log('Express server listening on port 3000.');
+});
+
+// Since we use app.listen, and get the result to server variable, we will declare socket here.
+const socketIO = new Server(server);
+// { cors: { origin: '*' } }
+
+socketIO.on('connection', (socket) => {
+  console.log('Client is here!');
+  socketIO.emit('chatroom1', 'hi');
+  socketIO.emit('chatroom1', 'Hello');
 });
