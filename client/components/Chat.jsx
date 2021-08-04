@@ -58,7 +58,7 @@ const Chat = ({roomId}) => {
         value={newMessage}
         onChange={handleNewMessageChange}
         placeholder="Write message..."
-        id="chat_input "
+        id="chat_input"
       />
       <button onClick={handleSendMessage} id="chat_button">
         Send
