@@ -8,6 +8,7 @@ import Chat from "../components/Chat";
 import NavBar from "../components/navBar";
 
 
+
 const MainAppContainer = () => {
   const [questionBool, setQuestionBool] = useState(true);
   const [fetchedData, setFetchedData] = useState(false);
@@ -66,7 +67,7 @@ const MainAppContainer = () => {
 
   return (
     <div className="mainContainer">
-      <NavBar/>
+      <NavBar />
       <QuestionsContainer questions={questions} />       
     </div>
   );
