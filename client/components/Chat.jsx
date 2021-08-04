@@ -39,30 +39,32 @@ const Chat = ({roomId}) => {
   return (
     <div className='chatbox'>
       <div className='chatbox_header'>
+        <h1 className="room-name">Chatroom: {roomId}</h1>
         <button className='chatbox_close'>Close</button>
       </div>
-      <h1 className="room-name">Chatroom: {roomId}</h1>
-        <ul className="messages-list">
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={`message-item ${
-                message.ownedByCurrentUser ? "my-message" : "received-message"
-              }`}
-            >
-              {message.body}
-            </li>
-          ))}
-        </ul>
-      <input
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write message..."
-        id="chat_input"
-      />
-      <button onClick={handleSendMessage} id="chat_button">
-        Send
-      </button>
+      <ul className="messages-list">
+        {messages.map((message, i) => (
+          <li
+            key={i}
+            className={`message-item ${
+              message.ownedByCurrentUser ? "my-message" : "received-message"
+            }`}
+          >
+            {message.body}
+          </li>
+        ))}
+      </ul>
+      <div className='chat_inputBtn'>
+        <input
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          placeholder="Write message..."
+          id="chat_input"
+        />
+        <button onClick={handleSendMessage} id="chat_button">
+          Send
+        </button>
+      </div>
       <div className='chatbox_footer'></div>
     </div>
   );
