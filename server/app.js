@@ -53,6 +53,8 @@ socketIO.on('connection', (socket) => {
   // console.log('Client is here!');
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
+
+  console.log(`You connected with socketId: ${socketIO.id}`);
   const { roomId } =socket.handshake.query;
   socket.join(1);
 

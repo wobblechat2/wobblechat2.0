@@ -36,6 +36,14 @@ const Chat = ({roomId, setClickChat}) => {
     setNewMessage('');
   }
 
+  //handle "Enter" key press as acceptable form of input submisison
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSendMessage(e);
+    }
+  }
+
   return (
     <div className='chatbox'>
       <div className='chatbox_header'>
@@ -58,6 +66,7 @@ const Chat = ({roomId, setClickChat}) => {
         <input
           value={newMessage}
           onChange={handleNewMessageChange}
+          onKeyDown={handleEnterKeyPress}
           placeholder="Write message..."
           id="chat_input"
         />
@@ -71,6 +80,16 @@ const Chat = ({roomId, setClickChat}) => {
 }
 
 export default Chat;
+
+
+
+
+
+
+
+
+
+
 
   // var socket = io();
 
