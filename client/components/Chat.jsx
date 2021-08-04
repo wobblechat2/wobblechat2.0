@@ -6,21 +6,10 @@ import useChat from "./useChat";
 
 const Chat = ({roomId, setClickChat}) => {
 
-  // websocket initialize from Hazel
-  // const socketIO = socket('ws://localhost:3000', {
-  //   transports: ['websocket'],
-  // });
-  // socketIO.on('connect_error', (error) => {
-  //   console.log('socket error', error);
-  // });
-
-  // // socketIO.on('connect', () => socketIO.send("It's from client!"));
   // socketIO.on('chatroom1', (message) => console.log(message));
 
   // const { roomId } = props.match.params;
 
-  // console.log('roomid =',roomId);
-  // console.log('props =',props);
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
   console.log('messages =',messages);
