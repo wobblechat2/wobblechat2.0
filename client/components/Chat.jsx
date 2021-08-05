@@ -13,8 +13,6 @@ const Chat = ({roomId, setClickChat}) => {
 
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = useState('');
-  console.log('messages =',messages);
-  console.log('newMessage =',newMessage);
 
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);
