@@ -12,19 +12,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
+        test: /.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator'],
         },
       },
       {
         //Andrew: Not sure how to load in css files but trying this way since it seems the former version only processed scss files...
-        // test: /\.css$/i,
         test: /\.s[ac]ss$/i,
-        exclude: /node_modules/,
+        // test: /\.css$/i,
+
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
