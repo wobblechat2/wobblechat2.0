@@ -14,7 +14,8 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
   const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = useState('');
 
-  console.log('messages =',messages);
+  console.log('socket room id =', roomId);
+  // console.log('messages =',messages);
   // console.log('comb messages =', combinedMessages);
   // console.log('newMessage =',newMessage);
 
@@ -27,7 +28,6 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     if (newMessage === '') return;
     sendMessage(newMessage);
     setNewMessage('');
-    // combined(messages);
   }
 
   //handle "Enter" key press as acceptable form of input submisison
@@ -36,6 +36,15 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
       handleSendMessage(e);
     }
   }
+
+  useEffect(()=> {
+    const length = dbMessages.concat(messages).length;
+    console.log(length)
+    const chatbox = document.querySelector(`.msgNum${length-1}`);
+    if (chatbox === null) return;
+    chatbox.scrollIntoView({behavior: 'smooth', block: "start", inline: "nearest"});
+  }, [messages])
+
 
   // the messages don't show up because it's labeled content in the key
   // in postgreSQL, allow the columns, 
@@ -46,7 +55,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     // use messageservice for postMessage
   // --> added new ** 
   const closeChat = async () => {
-    const result = await MessageService.postMessage(`/api/messages/${id}`, dbMessages.concat(messages));
+    const result = await MessageService.postMessage(`/api/messages/${id}`, messages);
     console.log('result of postMessage in Chat.jsx =', result);
     console.log('--------------------------------------------');
     setClickChat();
@@ -62,7 +71,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
       {dbMessages.concat(messages).map((message, i) => (
           <li
             key={i}
-            className={`message-item ${
+            className={`message-item msgNum${i} ${
               message.ownedByCurrentUser ? "my-message" : "received-message"
             }`}
           >

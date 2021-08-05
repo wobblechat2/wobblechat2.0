@@ -30,7 +30,7 @@ messageController.getMessages = (req, res, next) => {
 //postMessage should create a Message from the websockets call
 messageController.postMessage = (req, res, next) => {
    
-  const insertMessage = 'INSERT INTO messages (questionid, body, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
+  const insertMessage = 'INSERT INTO messages (datecreated, questionid, body, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4,$5) RETURNING *';
   // const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
   const { id } = req.params;
 
@@ -44,8 +44,8 @@ messageController.postMessage = (req, res, next) => {
   for (let i = 0; i < req.body.length; i++) {
     const { body, senderId, ownedByCurrentUser } = req.body[i];
     // const params = [id, body, senderId, ownedByCurrentUser];
-    const dateCreated = '1/1/1990';
-    const params = [id, body, senderId, ownedByCurrentUser];
+    const dateCreated = new Date(Date.now());
+    const params = [dateCreated, id, body, senderId, ownedByCurrentUser];
     (function (params, i, lengthMsg) {
       pool.query(insertMessage, params, function (err, rows, fields) {
         if (err) {

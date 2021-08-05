@@ -41,11 +41,11 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
         </div>
         <div className='divider'></div>
       </div>
-<<<<<<< HEAD
       {clickChat && <Chat roomId={id} setClickChat={() => setClickChat(false)}/>}
 =======
       {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)} id={id} dbMessages={dbMessages}/>}
->>>>>>> ea9fed045c54e7af825710af3476b6ccdbd5cbda
+=======
+      {clickChat && <Chat roomId={id} setClickChat={() => setClickChat(false)} id={id} dbMessages={dbMessages}/>}
     </>
   );
 };

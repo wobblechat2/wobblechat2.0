@@ -88,17 +88,17 @@ socketIO.on('connection', (socket) => {
 
 =======
   
-  // const { roomId } = socket.handshake.query;
-  socket.join(1);
+  const { roomId } = socket.handshake.query;
+  socket.join(roomId);
   // listen for new messages
 >>>>>>> ea9fed045c54e7af825710af3476b6ccdbd5cbda
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
-    socketIO.in(1).emit(NEW_CHAT_MESSAGE_EVENT, data);
-    socketIO.in(1).emit('1', 'check 1 room');
+    socketIO.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    // socketIO.in(roomId).emit(roomId, `<--------- room ${roomId}`);
   });
   
   // leave room if user closes socket
   socket.on('disconnect', () => {
-    socket.leave(1);
+    socket.leave(roomId);
   });
 });
