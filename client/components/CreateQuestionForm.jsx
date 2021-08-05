@@ -12,6 +12,7 @@ const CreateQuestionForm = (props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   
+  console.log('this:',description)
   //not working
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,29 +22,26 @@ const CreateQuestionForm = (props) => {
 
   return (
     <div className='questionCreate'>
-    <form onSubmit={handleSubmit}>
-      <label>
-        Title:
-        <input
-        type="text" 
-        value={title} 
-        onChange={e => setTitle(e.target.value )}
-        />
-      </label>
-      <br/>
-      <label>
-        Description:
-        <input
-        type="text" 
-        value={description} 
-        onChange={e => setDescription(e.target.value )}
-        />
-      </label>
-      <br/>
-      <input type="submit" value="Submit" />
-
-      <li>Question title is: { title } </li>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div className='add_question'>
+          <label className="title_label">
+            Title:
+            <input
+            type="text" 
+            className="add_title"
+            value={title} 
+            onChange={e => setTitle(e.target.value )}
+            />
+          </label>
+          <textarea
+          rows="4" cols="50"
+          className='add-description'
+          value={description} 
+          onChange={e => setDescription(e.target.value)}
+          ></textarea>
+          <input type="submit" value="Submit" className='add_submitBtn'/>
+        </div>
+      </form>
     </div>
   );
 }

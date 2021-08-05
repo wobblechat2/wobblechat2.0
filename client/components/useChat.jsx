@@ -12,7 +12,7 @@ const useChat = (roomId) => {
 
     // creates a websocket connection
     socketRef.current = socket(SOCKET_SERVER_URL, {
-      query: 1,
+      query: roomId,
     });
 
     // listens for incoming messages
