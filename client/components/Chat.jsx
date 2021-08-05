@@ -55,7 +55,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     // use messageservice for postMessage
   // --> added new ** 
   const closeChat = async () => {
-    const result = await MessageService.postMessage(`/api/messages/${id}`, dbMessages.concat(messages));
+    const result = await MessageService.postMessage(`/api/messages/${id}`, messages);
     console.log('result of postMessage in Chat.jsx =', result);
     console.log('--------------------------------------------');
     setClickChat();
