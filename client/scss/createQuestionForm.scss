@@ -18,7 +18,7 @@
 
 .title_label {
   font-weight: bold;
-  color: darken($Primary, 20%);
+  color: darken($Primary, 16%);
   font-size: $font-large;
 }
 
@@ -26,12 +26,12 @@
   margin-left: 10px;
   border-radius: 5px;
   border: 2px solid rgb(255, 214, 177);
-  width: 17rem;
+  width: 14rem;
   height: 2rem;
   font-weight: bold;
 }
 
-.add-description {
+.add-newDescription {
   margin: 1rem 0 1.2rem;
   width: 21rem;
   overflow: hidden;

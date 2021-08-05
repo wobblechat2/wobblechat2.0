@@ -20,8 +20,8 @@ return (
           {/* <Link to={"/create"}> */}
             <button className='newQ_button' onClick={() => clickQ()} >Ask a question</button>
           {/* </Link> */}
-          {clickQuestion && <CreateQuestionForm /> }
-          <button id="navLogout"> <a  href='http://localhost:3000/api/logout' >
+          {clickQuestion && <CreateQuestionForm setClickQuestion={() => setClickQuestion(false)}/> }
+          <button id="navLogout"> <a href='http://localhost:3000/api/logout' >
               Log Out
             </a></button>
            
