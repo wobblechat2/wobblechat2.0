@@ -53,6 +53,7 @@ const Chat = ({roomId, setClickChat, title, id, dbMessages}) => {
   // change in the query & params the selectorId, createdByUser
 
   const closeChat = async () => {
+    setClickChat();
     const result = await MessageService.postMessage(`/api/messages/${id}`, messages);
     console.log('result of postMessage in Chat.jsx =', result);
     console.log('--------------------------------------------');

@@ -42,7 +42,7 @@ app.use("/api/messages", messageRouter);
 app.use("/api", oAuthRouter);
 
 // Auth Routes
-app.get('/api/google', passport.authenticate('google', { scope: ['openid'] }));
+app.get('/api/google', passport.authenticate('google', { scope: ['openid'], prompt: 'select_account' }));
 app.get('/api/google/callback', passport.authenticate('google', { failureRedirect: '/api/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -80,10 +80,11 @@ socketIO.on('connection', (socket) => {
   // console.log('Client is here!');
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
-  
-  const { roomId } = socket.handshake.query;
+
+  //console.log(`You connected with socketId: ${socketIO.socket.id}`);
+  const { roomId } =socket.handshake.query;
   socket.join(roomId);
-  // listen for new messages
+
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
     socketIO.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
     // socketIO.in(roomId).emit(roomId, `<--------- room ${roomId}`);
