@@ -13,7 +13,6 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
 
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
-  // const [combinedMessages, setCombinedMessages] = useState([dbMessages, ...messages]);
 
   console.log('messages =',messages);
   // console.log('comb messages =', combinedMessages);
@@ -37,15 +36,6 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
       handleSendMessage(e);
     }
   }
-
-  // const combinedMessages = dbMessages
-  // event listener whenever messages gets updated
-  // const combined = (msg) => {
-  //   const previousM = dbMessages
-  //   // const newCombined = previousM.concat(messages);
-  //   const newCombined = msg;
-  //   setCombinedMessages(newCombined);
-  // }
 
   // the messages don't show up because it's labeled content in the key
   // in postgreSQL, allow the columns, 
