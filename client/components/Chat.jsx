@@ -16,6 +16,7 @@ const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
   const [combinedMessages, setCombinedMessages] = useState(dbMessages);
   console.log('messages =',messages);
   console.log('newMessage =',newMessage);
+
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);
   }
@@ -58,7 +59,7 @@ const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
       </div>
       <ul className="messages-list">
         {/* {dbMessages.map....} */}
-        {combinedMessages.map((message, i) => (
+        {co.map((message, i) => (
           <li
             key={i}
             className={`message-item ${

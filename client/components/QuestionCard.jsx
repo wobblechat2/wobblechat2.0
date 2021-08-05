@@ -21,6 +21,7 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
       console.log(result);
       // setDbMessages
       // if dbMessages = null, setdbmessages [];
+      // setDbMessages = [];
       setClickChat(true);
     }
   }
