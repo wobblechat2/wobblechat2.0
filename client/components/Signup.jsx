@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import { faAmericanSignLanguageInterpreting } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,21 +8,20 @@ const Signup = () => {
     useEffect(()=> {
         console.log('Hii')
         insertScript();
-    }, []);
-
+     }, [])
     const insertScript = ()=>{
-    const script = document.createElement('script');
-    script.src = 'https://apis.google.com/js/platform.js';
-    script.onload = ()=> {
-        initializeGoogleSigIn();
+      const script = document.createElement('script');
+      script.src = 'https://apis.google.com/js/platform.js';
+      script.onload = ()=> {
+         initializeGoogleSigIn();
+      }
+      document.body.appendChild(script);
     }
-    document.body.appendChild(script);
-    };
 
     const initializeGoogleSigIn = ()=>  {
         window.gapi.load('auth2', () => {
           let auth2 = gapi.auth2.init({
-            client_id: process.env.clientID,
+            client_id: 'YOUR CLIENT ID',
           })
           console.log('api inited')
           window.gapi.load('signin2', function () {
@@ -37,16 +37,20 @@ const Signup = () => {
             }
             window.gapi.signin2.render('loginButton', params)
           })
-        });
-      };
+        })
+      }
 
-    return( 
-        <React.Fragment>
-            <div className='googleAuth'>
-            <div id='loginButton' className='btn'>Signin</div>
-            </div>
-        </React.Fragment>
-        )
+    const login = () => {
+        fetch('/api/google')
+        .then(res => console.log(res));
+    }
+
+    return( <React.Fragment>
+        <div className='container'>
+        <div id='loginButton' className='btn'>Signin</div>
+        </div>
+        
+      </React.Fragment>)
 };
 
 export default Signup;
