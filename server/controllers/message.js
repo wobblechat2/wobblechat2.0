@@ -42,10 +42,10 @@ messageController.postMessage = (req, res, next) => {
   const pushed = [];
   const lengthMsg = req.body.length - 1;
   for (let i = 0; i < req.body.length; i++) {
-    const { body, senderId, ownedByCurrentUser } = req.body[i];
+    const { body, senderid, ownedbycurrentUser } = req.body[i];
     // const params = [id, body, senderId, ownedByCurrentUser];
     const dateCreated = new Date(Date.now());
-    const params = [dateCreated, id, body, senderId, ownedByCurrentUser];
+    const params = [dateCreated, id, body, senderid, ownedbycurrentUser];
     (function (params, i, lengthMsg) {
       pool.query(insertMessage, params, function (err, rows, fields) {
         if (err) {
