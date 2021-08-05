@@ -42,7 +42,7 @@ app.use("/api/messages", messageRouter);
 app.use("/api", oAuthRouter);
 
 // Auth Routes
-app.get('/api/google', passport.authenticate('google', { scope: ['openid'] }));
+app.get('/api/google', passport.authenticate('google', { scope: ['openid'], prompt: 'select_account' }));
 app.get('/api/google/callback', passport.authenticate('google', { failureRedirect: '/api/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
