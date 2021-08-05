@@ -42,7 +42,7 @@ app.use("/api/messages", messageRouter);
 app.use("/api", oAuthRouter);
 
 // Auth Routes
-app.get('/api/google', passport.authenticate('google', { scope: ['openid'] }));
+app.get('/api/google', passport.authenticate('google', { scope: ['openid'], prompt: 'select_account' }));
 app.get('/api/google/callback', passport.authenticate('google', { failureRedirect: '/api/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -63,8 +63,7 @@ const server = app.listen(3000, () => {
 const socketIO = new Server(server, {
   cors: {
     origin: "*",
-    credentials: true,
-  }
+  },
 });
 
 //socket admin
@@ -82,16 +81,17 @@ socketIO.on('connection', (socket) => {
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
 
-  console.log(`You connected with socketId: ${socketIO.id}`);
+  //console.log(`You connected with socketId: ${socketIO.socket.id}`);
   const { roomId } =socket.handshake.query;
-  socket.join(1);
+  socket.join(roomId);
 
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
-    socketIO.in(1).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    socketIO.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    // socketIO.in(roomId).emit(roomId, `<--------- room ${roomId}`);
   });
-
+  
+  // leave room if user closes socket
   socket.on('disconnect', () => {
-    socket.leave(1);
+    socket.leave(roomId);
   });
-
 });

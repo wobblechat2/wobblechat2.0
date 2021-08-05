@@ -9,7 +9,7 @@ const Signup = () => {
     const login = () => {
         fetch('/api/google')
         .then(res => {
-            console.log(res);
+            // console.log(res);
         }) 
         .catch(err => {return err})
     }

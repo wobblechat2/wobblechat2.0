@@ -4,8 +4,66 @@
   right: 2rem;
   width: 25rem;
   height: 25rem;
-  background-color: lighten($Primary, 68%);
+  background-color: lighten($yellow-color, 16%);
   padding: 1.5rem;
-  border: 1px solid $Accent1;
+  border: 1px solid rgb(255, 214, 177);
   border-radius: 10px;
+}
+
+.add_question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title_label {
+  font-weight: bold;
+  color: darken($Primary, 16%);
+  font-size: $font-large;
+}
+
+.add_title {
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 2px solid rgb(255, 214, 177);
+  width: 14rem;
+  height: 2rem;
+  font-weight: bold;
+}
+
+.add-newDescription {
+  margin: 1rem 0 1.2rem;
+  width: 21rem;
+  overflow: hidden;
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 16rem;
+  outline: none;
+  border: 1px solid rgb(255, 214, 177);
+  font-size: $font-medium;
+}
+
+.add_submitBtn {
+  align-self: flex-end;
+  margin-right: 0.5rem;
+  height: 2rem;
+  width: 4rem;
+  color: darken($Primary, 20%);
+  background-color: rgb(253, 222, 181);
+  outline: none;
+  border-radius: 10px;
+  border: 2px solid rgb(252, 201, 135);
+  cursor: pointer;
+}
+
+.add_submitBtn:hover {
+  color: $font-white;
+  background-color: rgb(255, 159, 32);
+  outline: none;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 2px solid rgb(247, 194, 125);
+  cursor: pointer;
+  transform: scale(1.1);
 }

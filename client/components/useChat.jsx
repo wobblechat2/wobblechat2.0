@@ -12,16 +12,18 @@ const useChat = (roomId) => {
 
     // creates a websocket connection
     socketRef.current = socket(SOCKET_SERVER_URL, {
-      query: 1,
+      query: roomId,
     });
 
     // listens for incoming messages
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
+      //console.log(`You connected with socketId: ${socketIO.socket.id}`);
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser : message.senderId === socketRef.current.id,
+        ownedbycurrentuser : message.senderid === socketRef.current.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
+      
     });
 
     // destroys socket reference when connection closed
@@ -35,7 +37,7 @@ const useChat = (roomId) => {
   const sendMessage = (messageBody) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       body: messageBody,
-      senderId: socketRef.current.id,
+      senderid: socketRef.current.id,
     });
   };
 
