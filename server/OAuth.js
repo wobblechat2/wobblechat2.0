@@ -22,7 +22,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: "http://localhost:3000/api/google/callback"
+    callbackURL: "/api/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     /*
