@@ -11,10 +11,11 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
 
   // const { roomId } = props.match.params;
 
-  const { messages, sendMessage } = useChat(1);
+  const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = useState('');
 
-  console.log('messages =',messages);
+  console.log('socket room id =', roomId);
+  // console.log('messages =',messages);
   // console.log('comb messages =', combinedMessages);
   // console.log('newMessage =',newMessage);
 
