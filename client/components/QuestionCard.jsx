@@ -12,16 +12,19 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
   // const { id, title, description, url, creator, isOpen } = props;
   
   const [clickChat, setClickChat] = useState(false);
-  const [dbMessages, setDbMessages] = useState([]);
+  const [dbMessages, setDbMessages] = useState('');
 
   const openChat = async () => {
     if (clickChat) return  setClickChat(false);
     else {
       const result = await MessageService.getMessage(`/api/messages/${id}`);
-      console.log(result);
-      // setDbMessages
-      // if dbMessages = null, setdbmessages [];
-      // setDbMessages = [];
+      console.log('result of getMessage in QCard.jsx =', result);      // setDbMessages
+      console.log('--------------------------------------------');
+      setDbMessages(result);
+      console.log('result of dbMessages state after get request =', dbMessages);
+      console.log('--------------------------------------------');
+
+      
       setClickChat(true);
     }
   }
@@ -38,7 +41,7 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
         </div>
         <div className='divider'></div>
       </div>
-      {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)} topicId={id} dbMessages={dbMessages}/>}
+      {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)} id={id} dbMessages={dbMessages}/>}
     </>
   );
 };

@@ -4,19 +4,21 @@ class MessageService {
     try {
       ('you are in the get message service');
       let result = await axios.get(url);
-      console.log(`we get the messages on service:`, result);
+      console.log(`messageService-getMessages-result.data :`, result.data);
+      console.log('--------------------------------------------');
       return result.data;
     } catch (err) {
       console.log(err);
     }
   }
 
-  static async postMessages(url, messages) {
+  static async postMessage(url, messages) {
     try {
       ('you are in the post message service');
       let result = await axios.post(url, messages);
-      console.log(`we get the post result on service:`, result);
-      return result.data;
+      console.log(`we get the postResult on service:`, result);
+      console.log('--------------------------------------------');
+      return result.config.data;
     } catch (err) {
       console.log(err);
     }
