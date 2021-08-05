@@ -63,8 +63,7 @@ const server = app.listen(3000, () => {
 const socketIO = new Server(server, {
   cors: {
     origin: "*",
-    credentials: true,
-  }
+  },
 });
 
 //socket admin
@@ -81,17 +80,17 @@ socketIO.on('connection', (socket) => {
   // console.log('Client is here!');
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
-
-  console.log(`You connected with socketId: ${socketIO.id}`);
-  const { roomId } =socket.handshake.query;
+  
+  // const { roomId } = socket.handshake.query;
   socket.join(1);
-
+  // listen for new messages
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
     socketIO.in(1).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    socketIO.in(1).emit('1', 'check 1 room');
   });
-
+  
+  // leave room if user closes socket
   socket.on('disconnect', () => {
     socket.leave(1);
   });
-
 });
