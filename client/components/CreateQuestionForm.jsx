@@ -12,6 +12,7 @@ const CreateQuestionForm = (props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   
+  console.log('this:',description)
   //not working
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,12 +33,12 @@ const CreateQuestionForm = (props) => {
             onChange={e => setTitle(e.target.value )}
             />
           </label>
-          <input
-          type="text" 
-          value={description} 
+          <textarea
+          rows="4" cols="50"
           className='add-description'
-          onChange={e => setDescription(e.target.value )}
-          />
+          value={description} 
+          onChange={e => setDescription(e.target.value)}
+          ></textarea>
           <input type="submit" value="Submit" className='add_submitBtn'/>
         </div>
       </form>

@@ -9,3 +9,17 @@
   border: 1px solid $Accent1;
   border-radius: 10px;
 }
+
+.add-description {
+  display: block;
+  width: 20rem;
+  max-height: 20rem;
+  overflow: hidden;
+  border: 2px solid;
+  border-radius: 20px;
+  padding: 10px;
+  min-height: 40px;
+  line-height: 20px;
+  outline: none;
+  font-size: $font-medium;
+}
