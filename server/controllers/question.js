@@ -27,8 +27,9 @@ questionController.postQuestion = (req, res, next) => {
   //userid comes from user controller (prev step in create question). 
   console.log('this is the question controller firing');
   const url = "testKe45434867568nny422"
-  const { ssid } = req.cookies; // { id: 7 }
+  let { ssid } = req.cookies; // { id: 7 }
   const { title, description } = req.body;
+  ssid = 1;
   const params = [url,title,description,ssid];
   const insertQuestion = 'INSERT INTO questions (url,title,description,creator) VALUES ($1,$2,$3,$4) RETURNING questions'
 

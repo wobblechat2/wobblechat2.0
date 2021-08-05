@@ -8,7 +8,7 @@ const NavBar = () => {
   
   const clickQ = () => {
     if (!clickQuestion) return setClickQuestion(true);
-    setClickQuestion(false);2
+    setClickQuestion(false);
   }
 
 return (
