@@ -26,11 +26,7 @@ CREATE TABLE IF NOT EXISTS messages (
   dateCreated date NOT NULL,
   questionId integer REFERENCES questions(id),
   content text NOT NULL,  
+  senderid varchar,
+  ownedbycurrentuser boolean,
+  body text,
 );
-
-ALTER TABLE messages
-ADD COLUMN senderid text,
-ADD COLUMN ownedbycurrentuser boolean,
-  -- senderId text NOT NULL,
-  -- ownedByCurrentUser boolean
-
