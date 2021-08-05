@@ -12,7 +12,7 @@ messageController.getMessages = (req, res, next) => {
   pool
     .query(prevMessages, params)
     .then((data) => {
-      console.log('in getMessages MW, data =', data)
+      console.log('in getMessages MW, data.rows =', data.rows)
       res.locals.dbMessages = data.rows;
       return next();
     })
@@ -42,7 +42,10 @@ messageController.postMessage = (req, res, next) => {
   // save the array of pushed messages to res.locals.postedMessage 
   // return next() to move to next middleware
 
-  const insertMessage = 'INSERT INTO messages (questionid, content, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
+  // once db columns added
+  // const insertMessage = 'INSERT INTO messages (questionid, content, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
+
+  const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
   const { id } = req.params;
   
   console.log('id in postMessage MW =', id);
@@ -51,25 +54,33 @@ messageController.postMessage = (req, res, next) => {
   console.log('--------------------------------------------');
   
   const pushed = [];
+  const lengthMsg = req.body.length-1;
   for (let i = 0; i < req.body.length; i++) {
         
     const { body, senderId, ownedByCurrentUser } = req.body[i];
-    const params = [id, body, senderId, ownedByCurrentUser];
-    (function(params) {
+    // const params = [id, body, senderId, ownedByCurrentUser];
+    const dateCreated = '1/1/1990';
+    const params = [id, body, dateCreated];
+    (function(params, i, lengthMsg) {
       pool.query(insertMessage, params, function (err, rows, fields) {
         if(err) {
           console.log('error in query postMessage :', err);
         } else {
-          pushed.push(rows[0]) // ---> maybe rows0.someVal
+          console.log('rows inside postquery =', rows.rows[0]);
+          pushed.push(rows.rows[0]) // ---> maybe rows0.someVal
+        }
+        if (i === lengthMsg) {
+          res.locals.postedMessages = pushed;
+          return next();
         }
       });  
-    })(params);
-
+    })(params, i, lengthMsg);
+    // console.log('pushed array inside forloop :', pushed);
   }
-    // if (i === req.body.length-1) {
-    res.locals.postedMessages = pushed;
-    return next();
-    // }
+    // console.log('pushed array outside forloop :', pushed);
+    // res.locals.postedMessages = pushed;
+    // return next();
+
 
     // pool 
     // .query(insertMessage, params)

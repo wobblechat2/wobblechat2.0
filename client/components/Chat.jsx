@@ -48,7 +48,9 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     setCombinedMessages(newCombined);
   }
 
-  // whenever we click close button, post to the database the messages that exist
+  // the messages don't show up because it's labeled content in the key
+  // in postgreSQL, allow the columns, 
+  // change in the query & params the selectorId, createdByUser
 
   // create closeChat = async
     // toggle boolean

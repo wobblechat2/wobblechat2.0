@@ -4,9 +4,9 @@ class MessageService {
     try {
       ('you are in the get message service');
       let result = await axios.get(url);
-      console.log(`messageService-getMessages-result.rows :`, result.rows);
+      console.log(`messageService-getMessages-result.data :`, result.data);
       console.log('--------------------------------------------');
-      return result.rows;
+      return result.data;
     } catch (err) {
       console.log(err);
     }
