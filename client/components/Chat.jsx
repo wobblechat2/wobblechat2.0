@@ -38,7 +38,9 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
 
   useEffect(()=> {
     const length = dbMessages.concat(messages).length;
+    console.log(length)
     const chatbox = document.querySelector(`.msgNum${length-1}`);
+    if (chatbox === null) return;
     chatbox.scrollIntoView({behavior: 'smooth', block: "start", inline: "nearest"});
   }, [messages])
 
