@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import auth from "./Auth";
 import Signup from './Signup'
-import image from '../assets/Logo.png'
+import image from '../assets/logo.png'
 
 
 const Login = (props) => {
