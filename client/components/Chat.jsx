@@ -3,29 +3,19 @@ import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
+// import MessageService from '../service/messageService';
 
-const Chat = ({roomId}) => {
+const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
 
-  // websocket initialize from Hazel
-  // const socketIO = socket('ws://localhost:3000', {
-  //   transports: ['websocket'],
-  // });
-  // socketIO.on('connect_error', (error) => {
-  //   console.log('socket error', error);
-  // });
-
-  // // socketIO.on('connect', () => socketIO.send("It's from client!"));
   // socketIO.on('chatroom1', (message) => console.log(message));
 
   // const { roomId } = props.match.params;
 
-  // console.log('roomid =',roomId);
-  // console.log('props =',props);
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
+  const [combinedMessages, setCombinedMessages] = useState(dbMessages);
   console.log('messages =',messages);
   console.log('newMessage =',newMessage);
-
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);
   }
@@ -34,41 +24,79 @@ const Chat = ({roomId}) => {
     e.preventDefault();
     sendMessage(newMessage);
     setNewMessage('');
+    combined();
   }
+
+  //handle "Enter" key press as acceptable form of input submisison
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSendMessage(e);
+      combined();
+    }
+  }
+
+  // const combinedMessages = dbMessages
+  // event listener whenever messages gets updated
+  const combined = () => {
+    const previousM = dbMessages
+    const newCombined = previousM.concat(messages);
+    setCombinedMessages(newCombined);
+  }
+
+
+  // replace below to combinedMessages
+
+
+  // whenever we click close button, post to the database the messages that exist
 
   return (
     <div className='chatbox'>
       <div className='chatbox_header'>
-        <button className='chatbox_close'>Close</button>
+        <h1 className="room-name">Chatroom: {roomId}</h1>
+        <button className='chatbox_close' onClick={setClickChat}>Close</button>
       </div>
-      <h1 className="room-name">Chatroom: {roomId}</h1>
-        <ul className="messages-list">
-          {messages.map((message, i) => (
-            <li
-              key={i}
-              className={`message-item ${
-                message.ownedByCurrentUser ? "my-message" : "received-message"
-              }`}
-            >
-              {message.body}
-            </li>
-          ))}
-        </ul>
-      <input
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write message..."
-        id="chat_input"
-      />
-      <button onClick={handleSendMessage} id="chat_button">
-        Send
-      </button>
+      <ul className="messages-list">
+        {/* {dbMessages.map....} */}
+        {combinedMessages.map((message, i) => (
+          <li
+            key={i}
+            className={`message-item ${
+              message.ownedByCurrentUser ? "my-message" : "received-message"
+            }`}
+          >
+            {message.body}
+          </li>
+        ))}
+      </ul>
+      <div className='chat_inputBtn'>
+        <input
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          onKeyDown={handleEnterKeyPress}
+          placeholder="Write message..."
+          id="chat_input"
+        />
+        <button onClick={handleSendMessage} id="chat_button">
+          Send
+        </button>
+      </div>
       <div className='chatbox_footer'></div>
     </div>
   );
 }
 
 export default Chat;
+
+
+
+
+
+
+
+
+
+
 
   // var socket = io();
 
