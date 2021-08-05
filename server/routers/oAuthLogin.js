@@ -11,7 +11,9 @@ oAuthRouter.get('/failed', (req, res) => res.redirect('http://localhost:8080/log
 
 // In this route you can see that if the user is logged in u can acess his info in: req.user
 oAuthRouter.get('/good', loggedInController.check, cookieController.setCookies, (req, res) =>  {
-    console.log('user:', req.user);
+    
+    // HELPFUL CONSOLE LOG of authenticated user info
+    // console.log('user:', req.user);
     res.redirect('http://localhost:8080/');
 });
  

@@ -3,9 +3,9 @@ import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
-// import MessageService from '../service/messageService';
+import MessageService from '../service/messageService';
 
-const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
+const Chat = ({roomId, setClickChat, id, dbMessages}) => {
 
   // socketIO.on('chatroom1', (message) => console.log(message));
 
@@ -14,8 +14,12 @@ const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
   const [combinedMessages, setCombinedMessages] = useState(dbMessages);
+  const [clickClose, setClickClose] = useState(false); // --> added new ***
+
   console.log('messages =',messages);
-  console.log('newMessage =',newMessage);
+  console.log('comb messages =', combinedMessages);
+  // console.log('newMessage =',newMessage);
+
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);
   }
@@ -44,11 +48,19 @@ const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
     setCombinedMessages(newCombined);
   }
 
-
-  // replace below to combinedMessages
-
-
   // whenever we click close button, post to the database the messages that exist
+
+  // create closeChat = async
+    // toggle boolean
+    // use messageservice for postMessage
+  // --> added new ** 
+  const closeChat = async () => {
+    const result = await MessageService.postMessage(`/api/messages/${id}`, combinedMessages);
+    console.log('result of postMessage in Chat.jsx =', result);
+    console.log('--------------------------------------------');
+    // setClickClose(true);
+    setClickClose(!clickClose);
+  }
 
   return (
     <div className='chatbox'>

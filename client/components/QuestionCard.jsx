@@ -18,9 +18,9 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
     if (clickChat) return  setClickChat(false);
     else {
       const result = await MessageService.getMessage(`/api/messages/${id}`);
-      console.log(result);
-      // setDbMessages
-      // if dbMessages = null, setdbmessages [];
+      console.log('result of getMessage in QCard.jsx =', result);      // setDbMessages
+      console.log('--------------------------------------------');
+      if (!dbMessages) setDbMessages([]);
       setClickChat(true);
     }
   }
@@ -37,7 +37,7 @@ const QuestionCard = ({ id, title, description, url, creator, isOpen }) => {
         </div>
         <div className='divider'></div>
       </div>
-      {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)} topicId={id} dbMessages={dbMessages}/>}
+      {clickChat && <Chat roomId={1} setClickChat={() => setClickChat(false)} id={id} dbMessages={dbMessages}/>}
     </>
   );
 };
