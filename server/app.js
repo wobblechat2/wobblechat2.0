@@ -82,7 +82,7 @@ socketIO.on('connection', (socket) => {
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
 
-  console.log(`You connected with socketId: ${socketIO.id}`);
+  //console.log(`You connected with socketId: ${socketIO.socket.id}`);
   const { roomId } =socket.handshake.query;
   socket.join(roomId);
 
