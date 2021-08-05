@@ -2,6 +2,7 @@ import { faLongArrowAltUp } from "@fortawesome/free-solid-svg-icons";
 import React, { Component, useState, useEffect } from "react"; // ---> import useState, useEffect
 import { Link } from "react-router-dom";
 import CreateQuestionForm from "../components/CreateQuestionForm";
+import logo from '../assets/ssmallLogo.png'
 
 const NavBar = () => {
   const [clickQuestion, setClickQuestion] = useState(false)
@@ -13,9 +14,12 @@ const NavBar = () => {
 
 return (
      <div className="top-menu-container">
+       <div className='nav_logo'>
+       <img className='nav_img' src={logo}></img>
         <Link to={"/"} className="brandname">
-          Wobblechat
-        </Link>
+        Pantless Chat
+          </Link>
+       </div>
         <div className="navbar_buttons">
           {/* <Link to={"/create"}> */}
             <button className='newQ_button' onClick={() => clickQ()} >Ask a question</button>
