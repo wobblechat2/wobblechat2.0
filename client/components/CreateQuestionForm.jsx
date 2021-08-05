@@ -32,7 +32,8 @@ const CreateQuestionForm = ({setClickQuestion}) => {
       .catch((err) => {
         console.log("Error making fetch request", err);
       });
-      setClickQuestion();
+      setClickQuestion(); 
+      window.location.reload();
     //history.push("/");
   }
 /*
