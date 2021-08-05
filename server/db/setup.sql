@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS questions (
 );
 CREATE TABLE IF NOT EXISTS messages (
   id SERIAL PRIMARY KEY,
-  -- dateCreated date NOT NULL,
+  dateCreated date NOT NULL,
   questionId integer REFERENCES questions(id),
   content text NOT NULL,  
 );

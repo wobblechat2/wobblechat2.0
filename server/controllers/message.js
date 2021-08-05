@@ -43,7 +43,7 @@ messageController.postMessage = (req, res, next) => {
   // return next() to move to next middleware
 
   // once db columns added
-  // const insertMessage = 'INSERT INTO messages (questionid, content, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
+  // const insertMessage = 'INSERT INTO messages (questionid, body, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
 
   const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
   const { id } = req.params;
