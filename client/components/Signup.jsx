@@ -6,7 +6,6 @@ import { faAmericanSignLanguageInterpreting } from '@fortawesome/free-solid-svg-
 import logo from '../assets/btn_google_light_normal_ios.svg'
 
 const Signup = () => {
-
     return( 
         <div className='googleBox'>
             <a className='googleAuth' href="/api/google">

@@ -11,7 +11,7 @@ router.get('/', questionController.getQuestions, (req,res) => {
 })
 
 //create new question ----> needs websockets
-router.post('/', questionController.postQuestion, questionController.getQuestions, (req,res) => {
+router.post('/', questionController.postQuestion, (req,res) => {
   return res.status(200).json({
     newQuestion: res.locals.questions[0].url,
     questions: res.locals.questions,

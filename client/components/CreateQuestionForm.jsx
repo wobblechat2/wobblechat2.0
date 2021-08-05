@@ -6,44 +6,69 @@ import { Link } from 'react-router-dom';
 //Requirements: one inherited prop: userId, must interact with DB and consequently update state upon confirmation of 
 //  successful post to db
 
-const CreateQuestionForm = (props) => {
+const CreateQuestionForm = ({setClickQuestion}) => {
   //using useState hook to enable state in component
   //first item = current value, second item = a setter function, to update value, destrctured via [] and initialized to empty string
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [newTitle, setTitle] = useState('');
+  const [newDescription, setDescription] = useState('');
   
+  console.log('this:',newDescription)
   //not working
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`This is what was submitted: ${title}`);
+    fetch("/api/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: newTitle ,
+        description: newDescription,
+      }),
+    })
+      .then((response) => {
+        //history.push("/");
+      })
+      .catch((err) => {
+        console.log("Error making fetch request", err);
+      });
+      setClickQuestion();
+    //history.push("/");
   }
+/*
+  const handleTitleInputChange = (e) => {
+    e.persist();
+    setTitle(e.target.value);
+  }
+  const handleDescriptionInputChange = (e) => {
+    e.persist();
+    setDescription(e.target.value);
+  }
+  */
 
 
   return (
     <div className='questionCreate'>
-    <form onSubmit={handleSubmit}>
-      <label>
-        Title:
-        <input
-        type="text" 
-        value={title} 
-        onChange={e => setTitle(e.target.value )}
-        />
-      </label>
-      <br/>
-      <label>
-        Description:
-        <input
-        type="text" 
-        value={description} 
-        onChange={e => setDescription(e.target.value )}
-        />
-      </label>
-      <br/>
-      <input type="submit" value="Submit" />
-
-      <li>Question title is: { title } </li>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div className='add_question'>
+          <label className="title_label">
+            Question:
+            <input
+            type="text" 
+            className="add_title"
+            value={newTitle} 
+            onChange={e => setTitle(e.target.value )}
+            />
+          </label>
+          <textarea
+          rows="4" cols="50"
+          className='add-newDescription'
+          value={newDescription} 
+          onChange={e => setDescription(e.target.value)}
+          ></textarea>
+          <input type="submit" value="Submit" className='add_submitBtn'/>
+        </div>
+      </form>
     </div>
   );
 }
