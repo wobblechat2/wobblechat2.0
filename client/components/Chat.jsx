@@ -13,11 +13,10 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
 
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
-  const [combinedMessages, setCombinedMessages] = useState(dbMessages);
-  const [clickClose, setClickClose] = useState(false); // --> added new ***
+  // const [combinedMessages, setCombinedMessages] = useState([dbMessages, ...messages]);
 
   console.log('messages =',messages);
-  console.log('comb messages =', combinedMessages);
+  // console.log('comb messages =', combinedMessages);
   // console.log('newMessage =',newMessage);
 
   const handleNewMessageChange = (e) => {
@@ -26,27 +25,27 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
+    if (newMessage === '') return;
     sendMessage(newMessage);
     setNewMessage('');
-    combined();
+    // combined(messages);
   }
 
   //handle "Enter" key press as acceptable form of input submisison
   const handleEnterKeyPress = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault();
       handleSendMessage(e);
-      combined();
     }
   }
 
   // const combinedMessages = dbMessages
   // event listener whenever messages gets updated
-  const combined = () => {
-    const previousM = dbMessages
-    const newCombined = previousM.concat(messages);
-    setCombinedMessages(newCombined);
-  }
+  // const combined = (msg) => {
+  //   const previousM = dbMessages
+  //   // const newCombined = previousM.concat(messages);
+  //   const newCombined = msg;
+  //   setCombinedMessages(newCombined);
+  // }
 
   // the messages don't show up because it's labeled content in the key
   // in postgreSQL, allow the columns, 
@@ -57,11 +56,10 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     // use messageservice for postMessage
   // --> added new ** 
   const closeChat = async () => {
-    const result = await MessageService.postMessage(`/api/messages/${id}`, combinedMessages);
-    console.log('result of postMessage in Chat.jsx =', result);
-    console.log('--------------------------------------------');
-    // setClickClose(true);
-    setClickClose(!clickClose);
+    // const result = await MessageService.postMessage(`/api/messages/${id}`, combinedMessages);
+    // console.log('result of postMessage in Chat.jsx =', result);
+    // console.log('--------------------------------------------');
+    setClickChat();
   }
 
   return (
@@ -71,8 +69,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
         <button className='chatbox_close' onClick={() => closeChat()}>Close</button>
       </div>
       <ul className="messages-list">
-        {/* {dbMessages.map....} */}
-        {co.map((message, i) => (
+      {dbMessages.concat(messages).map((message, i) => (
           <li
             key={i}
             className={`message-item ${
@@ -98,7 +95,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
       <div className='chatbox_footer'></div>
     </div>
   );
-}
+};
 
 export default Chat;
 
