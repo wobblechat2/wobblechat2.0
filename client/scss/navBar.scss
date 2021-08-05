@@ -19,6 +19,10 @@
   margin: 8px;
   padding: 5px 10px;
   border-radius: 5px;
+  color: black;
+  width: 7rem;
+  height: 1.6rem;
+  font-size: $font-medium;
 }
 
 .newQ_button:hover {
@@ -31,26 +35,23 @@
   border-radius: 5px;
 }
 
-#navLogout:visited {
-  color: black;
-}
-
 #navLogout {
-  border: 1px solid transparent;
-  background-color: white;
-}
-
-.signOut_button {
   margin: 8px;
   padding: 5px 10px;
   border-radius: 5px;
   padding: 3px 10px;
   font-size: 14px;
   margin: 8px;
-  color: black;
+  width: 5rem;
+  height: 1.6rem;
 }
 
-.signOut_button:hover {
+#navLogout:hover {
   transform: scale(1.1);
   border-radius: 5px;
+  background-color: white;
+}
+
+#navLogout a {
+  font-size: $font-medium;
 }
