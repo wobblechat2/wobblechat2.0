@@ -25,8 +25,8 @@ questionController.getQuestions = (req, res, next) => {
 questionController.postQuestion = (req, res, next) => {
   // ----------> url comes from websockets - 
   //userid comes from user controller (prev step in create question). 
-
-  const url = "testKenny22"
+  console.log('this is the question controller firing');
+  const url = "testKe45434867568nny422"
   const { ssid } = req.cookies; // { id: 7 }
   const { title, description } = req.body;
   const params = [url,title,description,ssid];

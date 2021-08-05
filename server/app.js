@@ -80,10 +80,11 @@ socketIO.on('connection', (socket) => {
   // console.log('Client is here!');
   // socketIO.emit('chatroom1', 'hi');
   // socketIO.emit('chatroom1', 'Hello');
-  
-  const { roomId } = socket.handshake.query;
+
+  //console.log(`You connected with socketId: ${socketIO.socket.id}`);
+  const { roomId } =socket.handshake.query;
   socket.join(roomId);
-  // listen for new messages
+
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
     socketIO.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
     // socketIO.in(roomId).emit(roomId, `<--------- room ${roomId}`);

@@ -17,11 +17,13 @@ const useChat = (roomId) => {
 
     // listens for incoming messages
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
+      //console.log(`You connected with socketId: ${socketIO.socket.id}`);
       const incomingMessage = {
         ...message,
         ownedByCurrentUser : message.senderId === socketRef.current.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
+      
     });
 
     // destroys socket reference when connection closed
