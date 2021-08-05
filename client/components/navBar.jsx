@@ -13,9 +13,11 @@ const NavBar = () => {
 
 return (
      <div className="top-menu-container">
+       <div className='nav_logo'>
         <Link to={"/"} className="brandname">
-          Wobblechat
-        </Link>
+            Wobblechat
+          </Link>
+       </div>
         <div className="navbar_buttons">
           {/* <Link to={"/create"}> */}
             <button className='newQ_button' onClick={() => clickQ()} >Ask a question</button>

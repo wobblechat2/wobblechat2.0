@@ -7,6 +7,10 @@
   background-color: darken($Primary, 5%);
 }
 
+.nav_logo {
+  display: flex;
+}
+
 .brandname {
   font-family: 'Faustina';
   font-size: 40px;
