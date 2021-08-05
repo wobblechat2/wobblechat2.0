@@ -16,7 +16,6 @@ const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
   const [combinedMessages, setCombinedMessages] = useState(dbMessages);
   console.log('messages =',messages);
   console.log('newMessage =',newMessage);
-
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);
   }
