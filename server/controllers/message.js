@@ -16,7 +16,17 @@ messageController.getMessages = (req, res, next) => {
     .then((data) => {
       // console.log('in getMessages MW, data =', data);
       console.log('in getMessages MW, data.rows =', data.rows);
-      res.locals.dbMessages = data.rows;
+      let sorted = data.rows.sort(function(a, b) {
+        return a.num - b.num;
+      })
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      console.log('check if sorted =', sorted);
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      res.locals.dbMessages = sorted;
       return next();
     })
     .catch((err) => {
@@ -57,6 +67,10 @@ messageController.postMessage = (req, res, next) => {
           pushed.push(rows.rows[0]); // ---> maybe rows0.someVal
         }
         if (i === lengthMsg) {
+          // let sorted = pushed.sort(function(a, b) {
+          //   return a.num - b.num;
+          // })
+
           res.locals.postedMessages = pushed;
           return next();
         }
