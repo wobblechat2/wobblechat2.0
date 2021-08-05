@@ -64,7 +64,7 @@ const MainAppContainer = () => {
     setFetchedData(false);
   }
 
-
+ 
   return (
     <div className="mainContainer">
       <NavBar />

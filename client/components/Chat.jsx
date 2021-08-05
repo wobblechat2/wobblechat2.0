@@ -11,7 +11,7 @@ const Chat = ({roomId, setClickChat}) => {
 
   // const { roomId } = props.match.params;
 
-  const { messages, sendMessage } = useChat(1);
+  const { messages, sendMessage } = useChat(roomId);
   const [newMessage, setNewMessage] = useState('');
   console.log('messages =',messages);
   console.log('newMessage =',newMessage);
