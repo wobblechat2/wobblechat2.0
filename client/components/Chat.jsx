@@ -66,7 +66,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     <div className='chatbox'>
       <div className='chatbox_header'>
         <h1 className="room-name">Chatroom: {roomId}</h1>
-        <button className='chatbox_close' onClick={setClickChat}>Close</button>
+        <button className='chatbox_close' onClick={() => closeChat()}>Close</button>
       </div>
       <ul className="messages-list">
         {/* {dbMessages.map....} */}

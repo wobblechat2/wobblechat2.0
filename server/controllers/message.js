@@ -12,6 +12,7 @@ messageController.getMessages = (req, res, next) => {
   pool
     .query(prevMessages, params)
     .then((data) => {
+      console.log('in getMessages MW, data =', data)
       res.locals.dbMessages = data.rows;
       return next();
     })
@@ -41,34 +42,51 @@ messageController.postMessage = (req, res, next) => {
   // save the array of pushed messages to res.locals.postedMessage 
   // return next() to move to next middleware
 
-  const insertMessage = 'INSERT INTO messages (questionId, body, senderId, ownedByCurrentUser) VALUES ($1,$2,$3,$4) RETURNING *';
+  const insertMessage = 'INSERT INTO messages (questionid, content, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
   const { id } = req.params;
-  const pushed = [];
-
+  
   console.log('id in postMessage MW =', id);
   console.log('req.body array of objects in postMessage MW =', req.body);
   console.log('--------------------------------------------');
   console.log('--------------------------------------------');
-
+  
+  const pushed = [];
   for (let i = 0; i < req.body.length; i++) {
+        
     const { body, senderId, ownedByCurrentUser } = req.body[i];
     const params = [id, body, senderId, ownedByCurrentUser];
-    pool 
-      .query(insertMessage, params)
-      .then((newMessage) => {
-        pushed.push(newMessage);
-      })
-      .catch((err) => {
-        return next({
-          status: 500,
-          message: 'Error creating messages',
-          error: err,
-        });
-      });
-  }
+    (function(params) {
+      pool.query(insertMessage, params, function (err, rows, fields) {
+        if(err) {
+          console.log('error in query postMessage :', err);
+        } else {
+          pushed.push(rows[0]) // ---> maybe rows0.someVal
+        }
+      });  
+    })(params);
 
-  res.locals.postedMessages = pushed;
-  return next();
+  }
+    // if (i === req.body.length-1) {
+    res.locals.postedMessages = pushed;
+    return next();
+    // }
+
+    // pool 
+    // .query(insertMessage, params)
+    // .then((newMessage) => {
+    //   pushed.push(newMessage);
+    // })
+    // .catch((err) => {
+    //   return next({
+    //     status: 500,
+    //     message: 'Error creating messages',
+    //     error: err,
+    //   });
+    // });
+
+    
+  // res.locals.postedMessages = pushed;
+  // return next();
 
   // --> what was here before
   // const dateCreated = '1/1/1990';

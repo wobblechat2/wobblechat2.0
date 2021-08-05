@@ -25,9 +25,12 @@ CREATE TABLE IF NOT EXISTS messages (
   id SERIAL PRIMARY KEY,
   -- dateCreated date NOT NULL,
   questionId integer REFERENCES questions(id),
-  body text NOT NULL,  
-  senderId text NOT NULL,
-  ownedByCurrentUser boolean
+  content text NOT NULL,  
 );
 
+ALTER TABLE messages
+ADD COLUMN senderid text,
+ADD COLUMN ownedbycurrentuser boolean,
+  -- senderId text NOT NULL,
+  -- ownedByCurrentUser boolean
 
