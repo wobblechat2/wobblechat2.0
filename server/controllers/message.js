@@ -16,7 +16,17 @@ messageController.getMessages = (req, res, next) => {
     .then((data) => {
       // console.log('in getMessages MW, data =', data);
       console.log('in getMessages MW, data.rows =', data.rows);
-      res.locals.dbMessages = data.rows;
+      let sorted = data.rows.sort(function(a, b) {
+        return a.num - b.num;
+      })
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      console.log('check if sorted =', sorted);
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      console.log('--------------------------------------------');
+      res.locals.dbMessages = sorted;
       return next();
     })
     .catch((err) => {
@@ -30,7 +40,7 @@ messageController.getMessages = (req, res, next) => {
 //postMessage should create a Message from the websockets call
 messageController.postMessage = (req, res, next) => {
    
-  const insertMessage = 'INSERT INTO messages (datecreated, questionid, body, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4,$5) RETURNING *';
+  const insertMessage = 'INSERT INTO messages (datecreated, questionid, body, senderid, ownedbycurrentuser, num) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *';
   // const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
   const { id } = req.params;
 
@@ -41,11 +51,13 @@ messageController.postMessage = (req, res, next) => {
 
   const pushed = [];
   const lengthMsg = req.body.length - 1;
+  let num = 0;
   for (let i = 0; i < req.body.length; i++) {
-    const { body, senderId, ownedByCurrentUser } = req.body[i];
+    const { body, senderid, ownedbycurrentuser } = req.body[i];
     // const params = [id, body, senderId, ownedByCurrentUser];
-    const dateCreated = new Date(Date.now());
-    const params = [dateCreated, id, body, senderId, ownedByCurrentUser];
+    const myDate = new Date(); 
+    num = num + 1; 
+    const params = [myDate, id, body, senderid, ownedbycurrentuser, num];
     (function (params, i, lengthMsg) {
       pool.query(insertMessage, params, function (err, rows, fields) {
         if (err) {
@@ -55,6 +67,10 @@ messageController.postMessage = (req, res, next) => {
           pushed.push(rows.rows[0]); // ---> maybe rows0.someVal
         }
         if (i === lengthMsg) {
+          // let sorted = pushed.sort(function(a, b) {
+          //   return a.num - b.num;
+          // })
+
           res.locals.postedMessages = pushed;
           return next();
         }

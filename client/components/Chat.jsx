@@ -5,7 +5,9 @@ import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
 import MessageService from '../service/messageService';
 
-const Chat = ({roomId, setClickChat, id, dbMessages}) => {
+const Chat = ({roomId, setClickChat, title, id, dbMessages}) => {
+// const Chat = ({roomId, setClickChat, title, id, dbMessages, setNumPeople}) => {
+
 
   // socketIO.on('chatroom1', (message) => console.log(message));
 
@@ -50,21 +52,23 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
   // in postgreSQL, allow the columns, 
   // change in the query & params the selectorId, createdByUser
 
-  // create closeChat = async
-    // toggle boolean
-    // use messageservice for postMessage
-  // --> added new ** 
   const closeChat = async () => {
     setClickChat();
     const result = await MessageService.postMessage(`/api/messages/${id}`, messages);
     console.log('result of postMessage in Chat.jsx =', result);
     console.log('--------------------------------------------');
+
+    /*
+    setNumPeople(numPeople-1);
+    */
+
+    setClickChat();
   }
 
   return (
     <div className='chatbox'>
       <div className='chatbox_header'>
-        <h1 className="room-name">Question: {id}</h1>
+        <h1 className="room-name">Question: {title}</h1>
         <button className='chatbox_close' onClick={() => closeChat()}>Close</button>
       </div>
       <ul className="messages-list">
@@ -72,7 +76,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
           <li
             key={i}
             className={`message-item msgNum${i} ${
-              message.ownedByCurrentUser ? "my-message" : "received-message"
+              message.ownedbycurrentuser ? "my-message" : "received-message"
             }`}
           >
             {message.body}

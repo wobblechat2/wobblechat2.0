@@ -29,4 +29,5 @@ CREATE TABLE IF NOT EXISTS messages (
   senderid varchar,
   ownedbycurrentuser boolean,
   body text,
+  num integer
 );
