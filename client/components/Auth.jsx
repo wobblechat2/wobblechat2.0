@@ -8,7 +8,7 @@ class Auth {
   }
 
 
-    isAuthenticated() {
+    isAuthenticated() { 
     const loggedIn = Cookies.get("loggedIn");
     console.log('loggedIn is', loggedIn);
     return !!loggedIn;

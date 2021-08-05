@@ -14,7 +14,7 @@ oAuthRouter.get('/good', loggedInController.check, cookieController.setCookies, 
     console.log('user:', req.user);
     res.redirect('http://localhost:8080/');
 });
-
+ 
 //Logout endpoint
 oAuthRouter.get('/logout', (req, res) => {
     req.session = null;

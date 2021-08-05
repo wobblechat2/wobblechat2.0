@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
     callbackURL: "/api/google/callback"
-  },
+  }, 
   function(accessToken, refreshToken, profile, done) {
     /*
      use the profile info (mainly profile id) to check if the user is registerd in ur db

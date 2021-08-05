@@ -10,7 +10,7 @@ const Signup = () => {
         fetch('/api/google')
         .then(res => {
             console.log(res);
-        })
+        }) 
         .catch(err => {return err})
     }
 
