@@ -28,7 +28,6 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
     if (newMessage === '') return;
     sendMessage(newMessage);
     setNewMessage('');
-    // combined(messages);
   }
 
   //handle "Enter" key press as acceptable form of input submisison
@@ -37,6 +36,13 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
       handleSendMessage(e);
     }
   }
+
+  useEffect(()=> {
+    const length = dbMessages.concat(messages).length;
+    const chatbox = document.querySelector(`.msgNum${length-1}`);
+    chatbox.scrollIntoView({behavior: 'smooth', block: "start", inline: "nearest"});
+  }, [messages])
+
 
   // the messages don't show up because it's labeled content in the key
   // in postgreSQL, allow the columns, 
@@ -63,7 +69,7 @@ const Chat = ({roomId, setClickChat, id, dbMessages}) => {
       {dbMessages.concat(messages).map((message, i) => (
           <li
             key={i}
-            className={`message-item ${
+            className={`message-item msgNum${i} ${
               message.ownedByCurrentUser ? "my-message" : "received-message"
             }`}
           >

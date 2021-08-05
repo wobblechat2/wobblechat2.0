@@ -5,6 +5,16 @@ import CreateQuestionForm from "../components/CreateQuestionForm";
 const NavBar = () => {
   const [clickQuestion, setClickQuestion] = useState(false)
 
+
+  const logoutBut = () => {
+    fetch('api/logout')
+    .then(res => {
+      window.location.href('http://localhost:8080')
+    })
+    .catch(err => {return err});
+  };
+  
+
   const clickQ = () => {
     if (!clickQuestion) return setClickQuestion(true);
     setClickQuestion(false);2
@@ -20,9 +30,9 @@ return (
             <button className='newQ_button' onClick={() => clickQ()} >Ask a question</button>
           {/* </Link> */}
           {clickQuestion && <CreateQuestionForm /> }
-          <Link to={"/logout"}>
-            <button className='signOut_button'>Sign out</button>
-          </Link>
+          <Link to='/'>
+            <button className='signOut_button' onClick={() => logoutBut()}>Sign out</button>
+            </Link>
         </div>
       </div>
   )
