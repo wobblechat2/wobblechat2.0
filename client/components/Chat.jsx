@@ -6,6 +6,8 @@ import useChat from "./useChat";
 import MessageService from '../service/messageService';
 
 const Chat = ({roomId, setClickChat, title, id, dbMessages}) => {
+// const Chat = ({roomId, setClickChat, title, id, dbMessages, setNumPeople}) => {
+
 
   // socketIO.on('chatroom1', (message) => console.log(message));
 
@@ -50,14 +52,15 @@ const Chat = ({roomId, setClickChat, title, id, dbMessages}) => {
   // in postgreSQL, allow the columns, 
   // change in the query & params the selectorId, createdByUser
 
-  // create closeChat = async
-    // toggle boolean
-    // use messageservice for postMessage
-  // --> added new ** 
   const closeChat = async () => {
     const result = await MessageService.postMessage(`/api/messages/${id}`, messages);
     console.log('result of postMessage in Chat.jsx =', result);
     console.log('--------------------------------------------');
+
+    /*
+    setNumPeople(numPeople-1);
+    */
+
     setClickChat();
   }
 
