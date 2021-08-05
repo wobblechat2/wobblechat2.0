@@ -14,7 +14,13 @@ const questionRouter = require('./routers/question.js');
 const messageRouter = require('./routers/message.js');
 const { Server } = require('socket.io');
 const { instrument } = require('@socket.io/admin-ui');
-
+/*
+const https = require("https");
+const fs = require("fs");
+const path = require("path");
+const options = {
+  cert: fs.readFileSync(path.resolve(__dirname, "./config/cert.pem")),
+*/
 //parsing request body
 app.use(express.json());
 app.use(cors());
@@ -66,7 +72,7 @@ socketIO.on('connection', (socket) => {
 
   console.log(`You connected with socketId: ${socketIO.id}`);
   const { roomId } =socket.handshake.query;
-  socket.join(1);
+  socket.join(roomId);
 
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
     socketIO.in(1).emit(NEW_CHAT_MESSAGE_EVENT, data);
