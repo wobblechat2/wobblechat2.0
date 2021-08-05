@@ -3,6 +3,7 @@ import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
+// import MessageService from '../service/messageService';
 
 const Chat = ({roomId, setClickChat}) => {
 
@@ -12,8 +13,6 @@ const Chat = ({roomId, setClickChat}) => {
 
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
-  console.log('messages =',messages);
-  console.log('newMessage =',newMessage);
 
   const handleNewMessageChange = (e) => {
     setNewMessage(e.target.value);

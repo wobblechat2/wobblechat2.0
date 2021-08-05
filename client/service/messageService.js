@@ -5,11 +5,10 @@ class MessageService {
     try {
       let result = await axios.post(url, messages);
       return result.data;
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
-
 }
 
 export default MessageService;

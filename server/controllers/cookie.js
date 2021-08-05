@@ -3,7 +3,8 @@ const cookieController = {};
 // Set cookie on user (of their ID) upon successful sign up or log in.
 cookieController.setCookies = (_req, res, next) => {
   try {
-    const { id } = res.locals;
+    let id = res.locals.id;
+    if (!id) id = _req.user.id;
     res.cookie("ssid", id, {
       expires: new Date(Date.now() + 1200000),
       httpOnly: true,
@@ -22,6 +23,28 @@ cookieController.setCookies = (_req, res, next) => {
     });
   }
 };
+
+// cookieController.oAuthSetCookie = (_req, res, next) => {
+//   try {
+//     const gID = _req.user.id
+//     res.cookie("giD", gID, {
+//       expires: new Date(Date.now() + 1200000),
+//       httpOnly: true,
+//     });
+
+//     res.cookie("loggedIn", true, {
+//       expires: new Date(Date.now() + 1200000),
+//       httpOnly: false,
+//     });
+
+//   } catch (err) {
+//     return next({
+//       status: 500,
+//       message: err.message
+//     });
+//   }
+  
+// };
 
 // Unset cookies on logout
 cookieController.unsetCookies = (_req, res, next) => {
