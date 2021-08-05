@@ -47,36 +47,35 @@ const Login = (props) => {
   };
 
   return (
-    <div className='loginBorder'>
-      <div className="loginComp">
-        <h1>Wobble Chat V2</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="inputBox">
-            <input
-              placeholder="User Name"
-              id="username"
-              className="form-field"
-              type="text"
-              name="username"
-              value={userData.username}
-              onChange={handleUsernameInputChange}
-            />
-            <input
-              placeholder="Password"
-              id="password"
-              className="form-field"
-              type="text"
-              name="password"
-              value={userData.password}
-              onChange={handlePasswordInputChange}
-            />
-            <input type="submit" value="Sign In" className="form-field" />
-          </div>
-        </form>
-        <Signup/>
-      </div>
-    </div> 
-    
+      <div className='loginBorder'>
+        <div className="loginComp">
+          <h1>Wobble Chat V2</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="inputBox">
+              <input
+                placeholder="User Name"
+                id="username"
+                className="form-field"
+                type="text"
+                name="username"
+                value={userData.username}
+                onChange={handleUsernameInputChange}
+              />
+              <input
+                placeholder="Password"
+                id="password"
+                className="form-field"
+                type="text"
+                name="password"
+                value={userData.password}
+                onChange={handlePasswordInputChange}
+              />
+              <input type="submit" value="Sign In" className="form-field" />
+            </div>
+          </form>
+          <Signup/>
+        </div>
+      </div> 
   );
 };
 
