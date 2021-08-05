@@ -7,11 +7,14 @@ const messageController = {};
 //puts details into question
 messageController.getMessages = (req, res, next) => {
   //needs to pull existing Messages related to Questions (join tables)
-  const prevMessages = `SELECT messages.*, questions.url FROM messages INNER JOIN questions ON messages.questionId = questions.id AND questions.id = $1`;
+  const prevMessages = `SELECT * FROM messages INNER JOIN questions ON messages.questionId = questions.id AND questions.id = $1`;
+  // const prevMessages = `SELECT messages.*, questions.url FROM messages INNER JOIN questions ON messages.questionId = questions.id AND questions.id = $1`;
+
   const params = [req.params.id];
   pool
     .query(prevMessages, params)
     .then((data) => {
+      // console.log('in getMessages MW, data =', data);
       console.log('in getMessages MW, data.rows =', data.rows);
       res.locals.dbMessages = data.rows;
       return next();
@@ -26,26 +29,9 @@ messageController.getMessages = (req, res, next) => {
 
 //postMessage should create a Message from the websockets call
 messageController.postMessage = (req, res, next) => {
-  // ------> added new ***
-
-  // const insertMessage query in the right order
-  // const id = req.params.id to get the question ID
-  // const pushed = []; to hold all the database posted messages
-
-  // iterate through req.body
-  // for each....
-  // destructure { body, senderId, ownedByCurrentUser } = req.body[i]
-  // set params [id, body, senderId, ownedByCurrentUser]
-  // pool query(insertMessage, params)
-  // for each result, push to pushed
-
-  // save the array of pushed messages to res.locals.postedMessage
-  // return next() to move to next middleware
-
-  // once db columns added
-  // const insertMessage = 'INSERT INTO messages (questionid, body, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
-
-  const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
+   
+  const insertMessage = 'INSERT INTO messages (questionid, body, senderid, ownedbycurrentuser) VALUES ($1,$2,$3,$4) RETURNING *';
+  // const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
   const { id } = req.params;
 
   console.log('id in postMessage MW =', id);
@@ -59,7 +45,7 @@ messageController.postMessage = (req, res, next) => {
     const { body, senderId, ownedByCurrentUser } = req.body[i];
     // const params = [id, body, senderId, ownedByCurrentUser];
     const dateCreated = '1/1/1990';
-    const params = [id, body, dateCreated];
+    const params = [id, body, senderId, ownedByCurrentUser];
     (function (params, i, lengthMsg) {
       pool.query(insertMessage, params, function (err, rows, fields) {
         if (err) {
