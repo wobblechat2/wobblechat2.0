@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 class MessageService {
   static async postMessages(url, messages) {
     try {
