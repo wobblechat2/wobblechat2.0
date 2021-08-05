@@ -22,23 +22,24 @@ const CreateQuestionForm = (props) => {
   return (
     <div className='questionCreate'>
       <form onSubmit={handleSubmit}>
-        <div></div>
-        <label className="title_label">
-          Title:
+        <div className='add_question'>
+          <label className="title_label">
+            Title:
+            <input
+            type="text" 
+            className="add_title"
+            value={title} 
+            onChange={e => setTitle(e.target.value )}
+            />
+          </label>
           <input
           type="text" 
-          className="add_title"
-          value={title} 
-          onChange={e => setTitle(e.target.value )}
+          value={description} 
+          className='add-description'
+          onChange={e => setDescription(e.target.value )}
           />
-        </label>
-        <input
-        type="text" 
-        value={description} 
-        className='add-description'
-        onChange={e => setDescription(e.target.value )}
-        />
-        <input type="submit" value="Submit" className='add_questions'/>
+          <input type="submit" value="Submit" className='add_submitBtn'/>
+        </div>
       </form>
     </div>
   );
