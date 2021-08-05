@@ -68,8 +68,8 @@ const Chat = ({roomId, setClickChat, title, id, dbMessages}) => {
   return (
     <div className='chatbox'>
       <div className='chatbox_header'>
-        <h1 className="room-name">Question: {title}</h1>
         <button className='chatbox_close' onClick={() => closeChat()}>Close</button>
+        <h1 className="room-name">Question: {title}</h1>
       </div>
       <ul className="messages-list">
       {dbMessages.concat(messages).map((message, i) => (
