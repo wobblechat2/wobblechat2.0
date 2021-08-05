@@ -24,5 +24,4 @@ router.post('/:id', messageController.postMessage, (req, res) => {
   return res.status(200).json(res.locals.postedMessages);
 });
 
-
 module.exports = router;

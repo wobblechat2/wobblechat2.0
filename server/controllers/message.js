@@ -12,7 +12,7 @@ messageController.getMessages = (req, res, next) => {
   pool
     .query(prevMessages, params)
     .then((data) => {
-      console.log('in getMessages MW, data.rows =', data.rows)
+      console.log('in getMessages MW, data.rows =', data.rows);
       res.locals.dbMessages = data.rows;
       return next();
     })
@@ -26,20 +26,20 @@ messageController.getMessages = (req, res, next) => {
 
 //postMessage should create a Message from the websockets call
 messageController.postMessage = (req, res, next) => {
-  // ------> added new *** 
-  
+  // ------> added new ***
+
   // const insertMessage query in the right order
   // const id = req.params.id to get the question ID
   // const pushed = []; to hold all the database posted messages
 
   // iterate through req.body
-    // for each....
-      // destructure { body, senderId, ownedByCurrentUser } = req.body[i]
-      // set params [id, body, senderId, ownedByCurrentUser]
-      // pool query(insertMessage, params) 
-      // for each result, push to pushed
-  
-  // save the array of pushed messages to res.locals.postedMessage 
+  // for each....
+  // destructure { body, senderId, ownedByCurrentUser } = req.body[i]
+  // set params [id, body, senderId, ownedByCurrentUser]
+  // pool query(insertMessage, params)
+  // for each result, push to pushed
+
+  // save the array of pushed messages to res.locals.postedMessage
   // return next() to move to next middleware
 
   // once db columns added
@@ -47,55 +47,52 @@ messageController.postMessage = (req, res, next) => {
 
   const insertMessage = 'INSERT INTO messages (questionid, content, dateCreated) VALUES ($1,$2,$3) RETURNING *';
   const { id } = req.params;
-  
+
   console.log('id in postMessage MW =', id);
   console.log('req.body array of objects in postMessage MW =', req.body);
   console.log('--------------------------------------------');
   console.log('--------------------------------------------');
-  
+
   const pushed = [];
-  const lengthMsg = req.body.length-1;
+  const lengthMsg = req.body.length - 1;
   for (let i = 0; i < req.body.length; i++) {
-        
     const { body, senderId, ownedByCurrentUser } = req.body[i];
     // const params = [id, body, senderId, ownedByCurrentUser];
     const dateCreated = '1/1/1990';
     const params = [id, body, dateCreated];
-    (function(params, i, lengthMsg) {
+    (function (params, i, lengthMsg) {
       pool.query(insertMessage, params, function (err, rows, fields) {
-        if(err) {
+        if (err) {
           console.log('error in query postMessage :', err);
         } else {
           console.log('rows inside postquery =', rows.rows[0]);
-          pushed.push(rows.rows[0]) // ---> maybe rows0.someVal
+          pushed.push(rows.rows[0]); // ---> maybe rows0.someVal
         }
         if (i === lengthMsg) {
           res.locals.postedMessages = pushed;
           return next();
         }
-      });  
+      });
     })(params, i, lengthMsg);
     // console.log('pushed array inside forloop :', pushed);
   }
-    // console.log('pushed array outside forloop :', pushed);
-    // res.locals.postedMessages = pushed;
-    // return next();
+  // console.log('pushed array outside forloop :', pushed);
+  // res.locals.postedMessages = pushed;
+  // return next();
 
+  // pool
+  // .query(insertMessage, params)
+  // .then((newMessage) => {
+  //   pushed.push(newMessage);
+  // })
+  // .catch((err) => {
+  //   return next({
+  //     status: 500,
+  //     message: 'Error creating messages',
+  //     error: err,
+  //   });
+  // });
 
-    // pool 
-    // .query(insertMessage, params)
-    // .then((newMessage) => {
-    //   pushed.push(newMessage);
-    // })
-    // .catch((err) => {
-    //   return next({
-    //     status: 500,
-    //     message: 'Error creating messages',
-    //     error: err,
-    //   });
-    // });
-
-    
   // res.locals.postedMessages = pushed;
   // return next();
 
