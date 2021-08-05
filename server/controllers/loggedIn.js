@@ -3,10 +3,11 @@ const loggedInController = {};
 
 loggedInController.check = (req, res, next) => {
     if (req.user) {
-        next();
+        return next();
     } else {
-        res.sendStatus(401);
+        return res.sendStatus(401);
     }
-}
+};
+
 
 module.exports = loggedInController;

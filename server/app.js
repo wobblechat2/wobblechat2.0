@@ -47,7 +47,7 @@ app.get('/api/google/callback', passport.authenticate('google', { failureRedirec
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/api/good');
-  }
+  } 
 );
 
 // Added global error middlware

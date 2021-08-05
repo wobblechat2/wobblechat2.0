@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/login" component={Login} />
         <ProtectedRoute exact={true} path="/">
           <MainAppContainer />
-        </ProtectedRoute>
+        </ProtectedRoute> 
         {/*<ProtectedRoute exact={true} path="/testChat">
           <SocketClientTest />
   </ProtectedRoute>*/}
