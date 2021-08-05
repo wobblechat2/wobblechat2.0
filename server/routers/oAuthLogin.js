@@ -15,7 +15,7 @@ oAuthRouter.get('/good', loggedInController.check, (req, res) => res.status(200)
 oAuthRouter.get('/logout', (req, res) => {
     req.session = null;
     req.logout();
-    res.redirect('/api');
+    res.redirect('/');
   });
 
 module.exports = oAuthRouter;
