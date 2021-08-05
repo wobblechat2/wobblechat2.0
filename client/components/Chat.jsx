@@ -3,9 +3,9 @@ import socket, { io } from 'socket.io-client';
 //import logo from './assets/chat_logo.png';
 import Container from 'react-bootstrap/Container';
 import useChat from "./useChat";
-import MessageService from '../service/messageService';
+// import MessageService from '../service/messageService';
 
-const Chat = ({roomId, setClickChat}) => {
+const Chat = ({roomId, setClickChat, topicId, dbMessages}) => {
 
   // socketIO.on('chatroom1', (message) => console.log(message));
 
@@ -13,6 +13,7 @@ const Chat = ({roomId, setClickChat}) => {
 
   const { messages, sendMessage } = useChat(1);
   const [newMessage, setNewMessage] = useState('');
+  const [combinedMessages, setCombinedMessages] = useState(dbMessages);
   console.log('messages =',messages);
   console.log('newMessage =',newMessage);
 
@@ -24,6 +25,7 @@ const Chat = ({roomId, setClickChat}) => {
     e.preventDefault();
     sendMessage(newMessage);
     setNewMessage('');
+    combined();
   }
 
   //handle "Enter" key press as acceptable form of input submisison
@@ -31,8 +33,23 @@ const Chat = ({roomId, setClickChat}) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSendMessage(e);
+      combined();
     }
   }
+
+  // const combinedMessages = dbMessages
+  // event listener whenever messages gets updated
+  const combined = () => {
+    const previousM = dbMessages
+    const newCombined = previousM.concat(messages);
+    setCombinedMessages(newCombined);
+  }
+
+
+  // replace below to combinedMessages
+
+
+  // whenever we click close button, post to the database the messages that exist
 
   return (
     <div className='chatbox'>
@@ -41,7 +58,8 @@ const Chat = ({roomId, setClickChat}) => {
         <button className='chatbox_close' onClick={setClickChat}>Close</button>
       </div>
       <ul className="messages-list">
-        {messages.map((message, i) => (
+        {/* {dbMessages.map....} */}
+        {combinedMessages.map((message, i) => (
           <li
             key={i}
             className={`message-item ${
