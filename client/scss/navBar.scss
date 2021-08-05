@@ -21,8 +21,23 @@
   border-radius: 5px;
 }
 
+.newQ_button:hover {
+  transform: scale(1.1);
+  border-radius: 5px;
+}
+
+.newQ_button:focus {
+  transform: scale(1.1);
+  border-radius: 5px;
+}
+
 .signOut_button {
   margin: 8px;
   padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.signOut_button:hover {
+  transform: scale(1.1);
   border-radius: 5px;
 }
