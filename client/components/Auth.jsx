@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
 
 
+
 class Auth {
   constructor() {
     this.authenticated = false;

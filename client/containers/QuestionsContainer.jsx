@@ -54,7 +54,7 @@ const QuestionsContainer = ({ questions }) => {
         {activeQuestionObjects}
       </div>
       <div className='inactiveQs'>
-        <h2 className='question_type'> Inactive questions </h2>
+        {/* <h2 className='question_type'> Inactive questions </h2> */}
         {inactiveQuestionObjects}
       </div>
     </div>

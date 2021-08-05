@@ -12,24 +12,25 @@
 
 .chatbox_header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: lighten($Primary, 5%);
   width: 42rem;
-  height: 3rem;
+  height: 4rem;
   border-radius: 20px 20px 0 0;
 }
 
 .room-name {
-  margin: 1rem;
+  margin: 0.1rem 0.7rem 0.7rem 0.7rem;
   font-size: $font-large;
   color: $font-white;
 }
 
 .chatbox_close {
   position: relative;
-  left: 13rem;
+  margin-top: 0.6rem;
+  left: 18rem;
   height: 1.6rem;
   width: 2.7rem;
   border-radius: 10px;
