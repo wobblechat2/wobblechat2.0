@@ -1,2 +1,13 @@
-# wobblechat 2.0
-An anonymous, lightweight chatroom for developers.
+<!-- PROJECT LOGO -->
+<br />
+<h1 align="center">Wobble Chat</h1>
+<p align="center">An anonymous, lightweight chatroom for developers</p>
+
+## Usage
+
+- Sign in with Google Auth <br />
+<img src="client/assets/mainPage.png" width="600"><br /><br />
+
+<img src="client/assets/AddQuestions.png" width="600"><br /><br />
+
+<img src="client/Images/Chatroom.png" width="600"><br /><br />
