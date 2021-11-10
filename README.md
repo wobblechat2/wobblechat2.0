@@ -6,8 +6,9 @@
 ## Usage
 
 - Sign in with Google Auth <br />
+
 <img src="client/assets/mainPage.png" width="700"><br /><br />
-- 
+
 <img src="client/assets/AddQuestions.png" width="700"><br /><br />
-- 
+
 <img src="client/assets/Chatroom.png" width="700"><br /><br />
